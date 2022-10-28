@@ -57,7 +57,7 @@ const ImmediateInfo = () => {
               </TabPanel>
               <TabPanel>
                 <div>
-                  {/* <div>
+                  <div>
                     <Document
                       file='./sample.pdf'
                       onLoadSuccess={onDocumentLoadSuccess}
@@ -67,7 +67,7 @@ const ImmediateInfo = () => {
                     <p>
                       Page {pageNumber} of {numPages}
                     </p>
-                  </div> */}
+                  </div>
                 </div>
               </TabPanel>
             </TabPanels>

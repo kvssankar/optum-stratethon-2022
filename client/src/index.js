@@ -5,13 +5,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { StepsStyleConfig as Steps } from "chakra-ui-steps";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const theme = extendTheme({
-  components: {
-    Steps,
-  },
   fonts: {
     heading: "Montserrat",
     body: "Montserrat",
