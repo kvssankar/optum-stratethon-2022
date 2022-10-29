@@ -27,7 +27,7 @@ import { ReactText } from "react";
 
 const LinkItems = [
   { name: "Profile", icon: FiHome, link: "/" },
-  // { name: "Session", icon: FiTrendingUp, link: "/session" },
+  { name: "Session", icon: FiTrendingUp, link: "/session" },
   { name: "Lab Tests", icon: FiCompass, link: "/labTests" },
   { name: "Tests progress", icon: FiStar, link: "/testProgress" },
   { name: "Edit Details", icon: FiSettings, link: "/session" },
@@ -80,7 +80,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
     >
       <Flex h='20' alignItems='center' mx='8' justifyContent='space-between'>
         <Text fontSize='2xl' fontFamily='monospace' fontWeight='bold'>
-          Healtheaze
+          Logo
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>

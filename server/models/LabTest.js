@@ -13,23 +13,11 @@ const LabTestSchema = new mongoose.Schema({
   lab_tester_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "LabTester",
-    // required: true,
+    required: true,
   },
   created_at: {
     type: Date,
     default: Date.now,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  consultationRequired: {
-    type: String,
-    required: true,
-  },
-  fileUrl: {
-    type: String,
-    required: true,
   },
 });
 

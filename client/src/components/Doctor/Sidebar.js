@@ -76,7 +76,11 @@ const SidebarContent = ({ onClose, ...rest }) => {
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+<<<<<<< HEAD
           Healtheaze
+=======
+          Logo
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
@@ -92,7 +96,11 @@ const SidebarContent = ({ onClose, ...rest }) => {
 const NavItem = ({ icon, children, link, ...rest }) => {
   return (
     <Link
+<<<<<<< HEAD
       href={link}
+=======
+      href="#"
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
     >

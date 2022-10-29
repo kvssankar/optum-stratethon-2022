@@ -27,6 +27,7 @@ router.post("/create", verify, async (req, res) => {
   console.log(req.body);
   const record = new Record({
     patient_id: req.body.patient_id,
+<<<<<<< HEAD
     doctor_id: req.body.doctor_id,
     session_id: req.body.session_id,
     file: [
@@ -35,6 +36,9 @@ router.post("/create", verify, async (req, res) => {
         url: req.body.filelocation,
       },
     ],
+=======
+    file: [req.body.file],
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
     description: req.body.description,
   });
   try {

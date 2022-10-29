@@ -18,7 +18,7 @@ import {
   doctor_categories,
   times,
 } from "../../constants/globalconstants";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDoctorStore } from "../../store/doctorStore";
 
@@ -104,9 +104,12 @@ const SimpleCard = () => {
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Sign in to your account</Heading>
+<<<<<<< HEAD
           <Heading color="gray" fontSize={"1xl"}>
             (As a DOCTOR)
           </Heading>
+=======
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
         </Stack>
         <Box
           rounded={"lg"}

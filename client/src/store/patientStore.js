@@ -2,15 +2,12 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
-import constants from "../constants/constants";
 
 const useStore = create(
   persist(
     (set) => ({
       patient: null,
       sessions: [],
-      labTests: [],
-      particularSession: null,
       login: (email, otp) => {
         axios.post("/api/patient/login", { email, otp }).then((res) => {
           localStorage.setItem("auth-token", res.data.token);
@@ -59,12 +56,13 @@ const useStore = create(
             alert(err.response.data.msg);
           });
       },
-      getParticularSession: (session_id) => {
+      logout: () => {
         let config = {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),
           },
         };
+<<<<<<< HEAD
         const x = "/api/session/" + session_id;
         axios.get(x, config).then((res) => {
           set((state) => ({
@@ -80,14 +78,18 @@ const useStore = create(
           particularSession: null,
         });
         localStorage.setItem("auth-token", null);
+=======
+        set({ patient: null });
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
       },
       getPatientSessions: (patient_id) => {
-        const url = "/api/session/patient/" + patient_id;
+        const String = "/api/session/patient/getSessions";
         let config = {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),
           },
         };
+<<<<<<< HEAD
         axios.get(url, config).then((res) => {
           set((state) => ({ sessions: res.data.data }));
         });
@@ -112,6 +114,12 @@ const useStore = create(
         };
         axios.post(String, { patient_id }, config).then((res) => {});
       },
+=======
+        axios.post(String, { patient_id }, config).then((res) => {
+          set((state) => ({ sessions: [res.data.data] }));
+        });
+      },
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
     }),
     {
       name: "patient-storage",

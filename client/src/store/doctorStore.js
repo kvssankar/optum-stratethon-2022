@@ -1,3 +1,4 @@
+//initialise zustand
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
@@ -6,6 +7,7 @@ const useStore = create(
   persist(
     (set) => ({
       doctor: null,
+<<<<<<< HEAD
       doctorSessions: [],
       patient: null,
       particularRecords: null,
@@ -13,6 +15,11 @@ const useStore = create(
         axios.post("/api/doctor/login", { email, otp }).then((res) => {
           localStorage.setItem("auth-token", res.data.token);
           set({ doctor: res.data.data });
+=======
+      login: (email, otp) => {
+        axios.post("/api/doctor/login", { email, otp }).then((res) => {
+          set({ doctor: res.data });
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
         });
       },
       register: (name, email, address, age, gender, otp, category) => {
@@ -40,6 +47,7 @@ const useStore = create(
 
         return flag;
       },
+<<<<<<< HEAD
       getDoctorSessions: (doctor_id) => {
         const String = "/api/session/doctor/" + doctor_id;
         let config = {
@@ -67,11 +75,15 @@ const useStore = create(
           filelocation,
           doctor_id
         );
+=======
+      logout: () => {
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
         let config = {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),
           },
         };
+<<<<<<< HEAD
         axios
           .post(
             "/api/record/create",
@@ -122,6 +134,9 @@ const useStore = create(
         };
         set({ doctor: null });
         localStorage.setItem("auth-token", null);
+=======
+        set({ patient: null });
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
       },
     }),
     {

@@ -28,6 +28,7 @@ const Home = () => {
   return (
     <div className="flex flex-col md:flex-row mx-5 ">
       <Sidebar />
+<<<<<<< HEAD
       {patient && sessions ? (
         <div className="flex flex-col pt-5 pb-5 pr-0 md:pr-5 w-full">
           <div className="flex justify-between">
@@ -57,6 +58,18 @@ const Home = () => {
           <div className="">
             <AllSessionTable />
           </div>
+=======
+      <div className='flex flex-col pt-5 pb-5 pr-0 md:pr-5 w-full'>
+        <div className='flex justify-between'>
+          <h1 className='font-bold text-blue-500 text-lg'>
+            Welcome {patient && (patient.name || patient.data.name)}
+          </h1>
+          <form onSubmit={(e) => onSubmit(e)}>
+            <button type='submit' className='font-bold text-blue-500 text-lg'>
+              Logout
+            </button>
+          </form>
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
         </div>
       ) : (
         <PageLoader />

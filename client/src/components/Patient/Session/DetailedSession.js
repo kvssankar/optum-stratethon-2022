@@ -7,11 +7,10 @@ import {
   Tag,
   Tooltip,
 } from "@chakra-ui/react";
-import PageLoader from "../../../components/Loader/PageLoader";
 
-import React, { useEffect, useState } from "react";
-import { usePatientStore } from "../../../store/patientStore";
+import React, { useState } from "react";
 
+<<<<<<< HEAD
 const ImmediateInfo = (session_id) => {
   const getParticularSession = usePatientStore(
     (state) => state.getParticularSession
@@ -23,6 +22,10 @@ const ImmediateInfo = (session_id) => {
   }, []);
 
   return particularSession ? (
+=======
+const ImmediateInfo = () => {
+  return (
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
     <div className='flex flex-col items-center md:items-stretch md:flex-row  gap-x-5 w-full mt-5 mb-5'>
       <div className='flex flex-col w-full md:w-full mb-6 border-2 border-blue-500 rounded-md'>
         <div className='flex flex-col md:flex-row items-center justify-center md:justify-between w-full text-white bg-blue-500 py-1 px-2 '>
@@ -49,62 +52,19 @@ const ImmediateInfo = (session_id) => {
             </TabList>
             <TabPanels>
               <TabPanel>
-                <div className='flex flex-col'>
-                  <div>
-                    <p>
-                      {" "}
-                      <span style={{ fontWeight: "bold" }}>
-                        Doctor Name -
-                      </span>{" "}
-                      {particularSession.doctor_id.name}
-                    </p>
-                    <p>
-                      <span style={{ fontWeight: "bold" }}>
-                        Doctor Specialization -
-                      </span>
-                      {particularSession.doctor_id.category}
-                    </p>
-                    <p>
-                      <span style={{ fontWeight: "bold" }}>Doctor Email -</span>
-                      {particularSession.doctor_id.email}
-                    </p>
-                    <hr></hr>
-                    <br></br>
-                    <hr></hr>
-                  </div>
-                  <div>
-                    <p>
-                      <span style={{ fontWeight: "bold" }}>Description</span>{" "}
-                      {particularSession.description}
-                    </p>
-                    <p>
-                      <span style={{ fontWeight: "bold" }}>Disease -</span>{" "}
-                      {particularSession.disease}
-                    </p>
-                    <div>
-                      {" "}
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>Start Date</span>{" "}
-                        {particularSession.started_at.date.substring(0, 10)}
-                      </p>
-                    </div>
-                  </div>
+                <div className='flex'>
+                  <p>
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book. It has survived not only five centuries,
+                    but also the leap into electroni
+                  </p>
                 </div>
               </TabPanel>
               <TabPanel>
-                <div className='flex flex-col md:flex-row justify-center items-center'>
-                  <div className='pdf mr-10 '>
-                    <img src='/pdficon.png' width='100px'></img>
-                    <sm style={{ fontSize: "10px" }}>Prescription 15/9/2022</sm>
-                  </div>
-                  <div className='pdf mr-10'>
-                    <img src='/pdficon.png' width='100px'></img>
-                    <sm style={{ fontSize: "10px" }}>Prescription 20/9/2022</sm>
-                  </div>
-                  <div className='pdf mr-10'>
-                    <img src='/pdficon.png' width='100px'></img>
-                    <sm style={{ fontSize: "10px" }}>Prescription 10/9/2022</sm>
-                  </div>
+                <div>
                   {/* <div>
                     <Document
                       file='./sample.pdf'
@@ -118,33 +78,12 @@ const ImmediateInfo = (session_id) => {
                   </div> */}
                 </div>
               </TabPanel>
-              <TabPanel>
-                <div className='flex flex-col md:flex-row justify-center items-center'>
-                  <div className='pdf mr-10 '>
-                    <img src='/pdficon.png' width='100px'></img>
-                    <sm style={{ fontSize: "10px" }}>Report MRI</sm>
-                  </div>
-                  <div className='pdf mr-10'>
-                    <img src='/pdficon.png' width='100px'></img>
-                    <sm style={{ fontSize: "10px" }}>Report BloodTest</sm>
-                  </div>
-                  <div className='pdf mr-10'>
-                    <img src='/pdficon.png' width='100px'></img>
-                    <sm style={{ fontSize: "10px" }}>Report X-Ray Chest</sm>
-                  </div>
-                  <div className='pdf mr-10'>
-                    <img src='/pdficon.png' width='100px'></img>
-                    <sm style={{ fontSize: "10px" }}>Report X-Ray Hand</sm>
-                  </div>
-                </div>
-              </TabPanel>
+              <TabPanel></TabPanel>
             </TabPanels>
           </Tabs>
         </div>
       </div>
     </div>
-  ) : (
-    <PageLoader />
   );
 };
 

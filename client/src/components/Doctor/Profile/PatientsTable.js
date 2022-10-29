@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { FiNavigation } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+=======
+import React from "react";
+
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
 import {
   Table,
   Thead,
@@ -12,8 +17,8 @@ import {
   Td,
   TableCaption,
   TableContainer,
-  IconButton,
 } from "@chakra-ui/react";
+<<<<<<< HEAD
 import ComponentLoader from "../../Loader/ComponentLoader";
 import { useDoctorStore } from "../../../store/doctorStore";
 import { times } from "../../../constants/globalconstants";
@@ -32,20 +37,24 @@ const PatientsTable = () => {
     console.log(doctorSessions);
   }, []);
 
+=======
+
+const PatientsTable = () => {
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
   return (
-    <TableContainer border={"2px"} rounded='md' borderColor={"blue.500"}>
-      <Table size='sm' variant='simple' colorScheme={"blue"}>
+    <TableContainer border={"2px"} rounded="md" borderColor={"blue.500"}>
+      <Table variant="simple" colorScheme={"blue"}>
         <Thead>
           <Tr>
             <Th isNumeric>Sno</Th>
             <Th>Patient Name</Th>
-            <Th>Date</Th>
-            <Th>Problem</Th>
+            <Th>Start Date</Th>
+            <Th>Last Visit</Th>
             <Th>Description</Th>
-            <Th>Open</Th>
           </Tr>
         </Thead>
         <Tbody>
+<<<<<<< HEAD
           {doctorSessions ? (
             doctorSessions.map((session) => (
               <Tr>
@@ -69,6 +78,29 @@ const PatientsTable = () => {
           ) : (
             <ComponentLoader />
           )}
+=======
+          <Tr>
+            <Td>1</Td>
+            <Td>Mahesh</Td>
+            <Td>5th Octover, 2022</Td>
+            <Td>5th Octover, 2022</Td>
+            <Td>Headache</Td>
+          </Tr>
+          <Tr>
+            <Td>2</Td>
+            <Td>John</Td>
+            <Td>5th Octover, 2022</Td>
+            <Td>5th Octover, 2022</Td>
+            <Td>Headache</Td>
+          </Tr>
+          <Tr>
+            <Td>3</Td>
+            <Td>John</Td>
+            <Td>5th Octover, 2022</Td>
+            <Td>5th Octover, 2022</Td>
+            <Td>Headache</Td>
+          </Tr>
+>>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
         </Tbody>
       </Table>
     </TableContainer>

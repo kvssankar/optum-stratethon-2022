@@ -92,25 +92,3 @@ export const times = {
   22: "8:00 PM to 8.30 PM",
   23: "8:30 PM to 9.00 PM",
 };
-
-export const disease_lab_eyes = {
-  0: "No Diabetic Retinopathy",
-  1: "Mild Diabetic Retinopathy",
-  2: "Moderate Diabetic Retinopathy",
-  3: "Severe Diabetic Retinopathy",
-  4: "Proliferative Diabetic Retinopathy",
-};
-
-export const disease_lab_lungs = {
-  0: "Atelectasis",
-  1: "Consolidation",
-  2: "Infiltration",
-  3: "Pneumothorax",
-  4: "Edema",
-  5: "Emphysema",
-  6: "Fibrosis",
-  7: "Effusion",
-  8: "Pneumonia",
-  9: "Hernia",
-  10: "No findings",
-};
