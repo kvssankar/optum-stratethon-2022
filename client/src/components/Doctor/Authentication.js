@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { usePatientStore } from "../../store/patientStore";
+import { useDoctorStore } from "../../store/doctorStore";
 
 const SimpleCard = () => {
   const [progress, setProgress] = useState(0);
@@ -26,6 +26,7 @@ const SimpleCard = () => {
     gender: "",
     address: "",
     age: "",
+    category: "",
   });
 
   const onChange = (e) => {
@@ -36,11 +37,11 @@ const SimpleCard = () => {
     e.preventDefault();
   };
   const navigate = useNavigate();
-  const { email, otp, gender, address, age, name } = formData;
+  const { email, otp, gender, address, age, name, category } = formData;
   const [userExists, setUserExists] = useState(false);
-  const sendotp = usePatientStore((state) => state.getOtp);
-  const login = usePatientStore((state) => state.login);
-  const register = usePatientStore((state) => state.register);
+  const sendotp = useDoctorStore((state) => state.getOtp);
+  const login = useDoctorStore((state) => state.login);
+  const register = useDoctorStore((state) => state.register);
   const action = async () => {
     if (progress === 0) {
       try {
@@ -59,7 +60,7 @@ const SimpleCard = () => {
       if (userExists) {
         try {
           await login(email, otp);
-          navigate("/patient");
+          navigate("/Doctor");
         } catch (err) {
           console.log(err);
         }
@@ -69,8 +70,8 @@ const SimpleCard = () => {
       }
     } else if (progress === 2) {
       try {
-        await register(name, email, address, age, gender, otp);
-        navigate("/patient");
+        await register(name, email, address, age, gender, otp, category);
+        navigate("/Doctor");
       } catch (err) {
         console.log(err);
       }
@@ -170,6 +171,18 @@ const SimpleCard = () => {
                     placeholder='gender'
                     name='gender'
                     value={gender}
+                    onChange={(e) => onChange(e)}
+                  />
+                </FormControl>
+              )}
+              {progress == 2 && (
+                <FormControl id='category'>
+                  <FormLabel>Category</FormLabel>
+                  <Input
+                    type='string'
+                    placeholder='Select Category'
+                    name='category'
+                    value={category}
                     onChange={(e) => onChange(e)}
                   />
                 </FormControl>

@@ -7,6 +7,7 @@ import {
   Tag,
   Tooltip,
 } from "@chakra-ui/react";
+
 import React, { useState } from "react";
 
 const ImmediateInfo = () => {

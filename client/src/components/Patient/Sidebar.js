@@ -26,11 +26,11 @@ import { IconType } from "react-icons";
 import { ReactText } from "react";
 
 const LinkItems = [
-  { name: "Home", icon: FiHome },
-  { name: "Trending", icon: FiTrendingUp },
-  { name: "Explore", icon: FiCompass },
-  { name: "Favourites", icon: FiStar },
-  { name: "Settings", icon: FiSettings },
+  { name: "Profile", icon: FiHome, link: "/" },
+  { name: "Session", icon: FiTrendingUp, link: "/session" },
+  { name: "Lab Tests", icon: FiCompass, link: "/labTests" },
+  { name: "Tests progress", icon: FiStar, link: "/testProgress" },
+  { name: "Edit Details", icon: FiSettings, link: "/session" },
 ];
 
 export default function Sidebar({ children }) {
@@ -78,14 +78,12 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h='full'
       {...rest}
     >
-      <Flex h='20' alignItems='center' mx='8' justifyContent='space-between'>
-        <Text fontSize='2xl' fontFamily='monospace' fontWeight='bold'>
-          Logo
-        </Text>
+      <Flex h='20' alignItems='center' justifyContent='space-between'>
+        <img src='Images/SwasthyaFull.png' alt='LOGO' />
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} link={link.link}>
           {link.name}
         </NavItem>
       ))}
@@ -93,10 +91,10 @@ const SidebarContent = ({ onClose, ...rest }) => {
   );
 };
 
-const NavItem = ({ icon, children, ...rest }) => {
+const NavItem = ({ icon, link, children, ...rest }) => {
   return (
     <Link
-      href='#'
+      href={link}
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
     >
