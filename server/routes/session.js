@@ -15,9 +15,23 @@ router.get("/:sid", verify, async (req, res) => {
 
 router.get("/patient/:pid/", verify, async (req, res) => {
   try {
+    console.log(req.params.pid);
     const sessions = await Session.find({
       patient_id: req.params.pid,
     });
+    res.json({ data: sessions });
+  } catch (err) {
+    res.status(500).json({ status: 1, err });
+  }
+});
+
+router.post("/patient/getSessions/", verify, async (req, res) => {
+  try {
+    console.log(req.body.patient_id);
+    const sessions = await Session.find({
+      patient_id: req.body.patient_id,
+    });
+    console.log(sessions);
     res.json({ data: sessions });
   } catch (err) {
     res.status(500).json({ status: 1, err });

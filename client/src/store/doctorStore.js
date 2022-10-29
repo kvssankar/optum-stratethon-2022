@@ -37,6 +37,14 @@ const useStore = create(
 
         return flag;
       },
+      logout: () => {
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        set({ patient: null });
+      },
     }),
     {
       name: "doctor-storage",

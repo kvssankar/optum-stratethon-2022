@@ -78,8 +78,10 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h='full'
       {...rest}
     >
-      <Flex h='20' alignItems='center' justifyContent='space-between'>
-        <img src='Images/SwasthyaFull.png' alt='LOGO' />
+      <Flex h='20' alignItems='center' mx='8' justifyContent='space-between'>
+        <Text fontSize='2xl' fontFamily='monospace' fontWeight='bold'>
+          Logo
+        </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (

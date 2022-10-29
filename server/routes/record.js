@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Record = require("../models/Record");
-const verify = require("./verifyToken");
+const verify = require("../verify");
 
 router.get("/:rid", async (req, res) => {
   try {
