@@ -9,7 +9,7 @@ const useStore = create(
     (set) => ({
       patient: null,
       sessions: [],
-      labTest: [],
+      labTests: [],
       particularSession: [],
       login: (email, otp) => {
         axios.post("/api/patient/login", { email, otp }).then((res) => {
@@ -101,6 +101,16 @@ const useStore = create(
         axios
           .post(String, { patient_id, name, fileUrl }, config)
           .then((res) => {});
+      },
+      getLabTests: (patient_id) => {
+        console.log("CHEK AT STORE", patient_id);
+        const String = "/api/session/labtests/get";
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        axios.post(String, { patient_id }, config).then((res) => {});
       },
     }),
     {

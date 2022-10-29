@@ -120,10 +120,6 @@ const ImmediateInfo = (session_id) => {
               </TabPanel>
               <TabPanel>
                 <div className='flex flex-col md:flex-row justify-center items-center'>
-                  <div className='pdf mr-10 '>
-                    <img src='/pdficon.png' width='100px'></img>
-                    <sm style={{ fontSize: "10px" }}>Prescription 15/9/2022</sm>
-                  </div>
                   <div className='pdf mr-10'>
                     <img src='/pdficon.png' width='100px'></img>
                     <sm style={{ fontSize: "10px" }}>Prescription 20/9/2022</sm>
@@ -150,10 +146,6 @@ const ImmediateInfo = (session_id) => {
                   <div className='pdf mr-10 '>
                     <img src='/pdficon.png' width='100px'></img>
                     <sm style={{ fontSize: "10px" }}>Report MRI</sm>
-                  </div>
-                  <div className='pdf mr-10'>
-                    <img src='/pdficon.png' width='100px'></img>
-                    <sm style={{ fontSize: "10px" }}>Report BloodTest</sm>
                   </div>
                   <div className='pdf mr-10'>
                     <img src='/pdficon.png' width='100px'></img>

@@ -128,17 +128,25 @@ router.post("/labtest/perform", async (req, res) => {
     try {
       const response = null;
       if ((req.body.type = "eyes")) {
-        response = await axios({
-          url: "http://65.2.141.113:5000/eyes",
-          method: "post",
-        });
-        console.log("HI in if");
+        try {
+          response = await axios({
+            url: "http://65.2.141.113:5000/eyes",
+            method: "post",
+          });
+          console.log("HI in if");
+        } catch (err) {
+          console.log({ message: "Error in creating first request" });
+        }
       } else {
-        response = await axios({
-          url: "lungs",
-          method: "post",
-        });
-        console.log("HI in else");
+        try {
+          response = await axios({
+            url: "http://65.2.141.113:5000/lungs",
+            method: "post",
+          });
+          console.log("HI in else");
+        } catch (err) {
+          console.log({ message: "Error in creating second request" });
+        }
       }
       const labTest = new LabTest({
         name: req.body.name,
@@ -150,15 +158,25 @@ router.post("/labtest/perform", async (req, res) => {
       console.log("HI2");
       console.log(labTest);
       console.log("H3");
-      console.log(response.data);
-      console.log("HI4");
       const newLabTest = await labTest.save();
       return res.json({ data: newLabTest });
     } catch (err) {
       return res.status(500).json({ message: err });
     }
   } catch (err) {
-    return res.status(500).json({ status: 1, err });
+    return res.status(500).json({ status: 1, message: "hi" });
+  }
+});
+
+router.post("/labtests/get", async (req, res) => {
+  try {
+    const labtest = await LabTest.find({ patient_id: req.body.patient_id });
+    console.log("**********************");
+    console.log(labtest, "here are sessions");
+    console.log("**********************");
+    res.json({ data: labtest });
+  } catch (err) {
+    res.status(500).json({ status: 1, err });
   }
 });
 

@@ -27,33 +27,21 @@ const AllSessionTable = () => {
             <Th>Name</Th>
             <Th>Date</Th>
             <Th>Status</Th>
+            <Th>Visitation Required</Th>
+            <Th>Diagnosis</Th>
             <Th>Download</Th>
           </Tr>
         </Thead>
         <Tbody>
           <Tr>
             <Td>1</Td>
-            <Td>Blood Test</Td>
-            <Td>7th Octover, 2022</Td>
-            <Td>
-              <Tag bgColor='lightgreen'>Completed</Tag>
-            </Td>
-            <Td>
-              <IconButton
-                variant='outline'
-                aria-label='open menu'
-                icon={<FiDownload />}
-                onClick={() => onButtonClick()}
-              />
-            </Td>
-          </Tr>
-          <Tr>
-            <Td>2</Td>
-            <Td> MRI</Td>
+            <Td> CT Scan </Td>
             <Td>9th Octover, 2022</Td>
             <Td>
               <Tag bgColor='lightgreen'>Completed</Tag>
             </Td>
+            <Td>Yes</Td>
+            <Td>Pneumothorax</Td>
             <Td>
               <IconButton
                 variant='outline'
@@ -65,12 +53,14 @@ const AllSessionTable = () => {
           </Tr>
 
           <Tr>
-            <Td>4</Td>
-            <Td>XRAY Chest</Td>
-            <Td>15th Octover, 2022</Td>
+            <Td>2</Td>
+            <Td>CT Eye</Td>
+            <Td>12th Octover, 2022</Td>
             <Td>
               <Tag bgColor='lightgreen'>Completed</Tag>
             </Td>
+            <Td>yes</Td>
+            <Td>Mild Retinopathy</Td>
             <Td>
               <IconButton
                 variant='outline'
@@ -81,12 +71,32 @@ const AllSessionTable = () => {
             </Td>
           </Tr>
           <Tr>
-            <Td>4</Td>
-            <Td>XRAY Eye</Td>
+            <Td>3</Td>
+            <Td>CT Eye</Td>
+            <Td>15th Octover, 2022</Td>
+            <Td>
+              <Tag bgColor='lightgreen'>Completed</Tag>
+            </Td>
+            <Td>No</Td>
+            <Td>Clear</Td>
+            <Td>
+              <IconButton
+                variant='outline'
+                aria-label='open menu'
+                icon={<FiDownload />}
+                onClick={() => onButtonClick()}
+              />
+            </Td>
+          </Tr>
+          <Tr>
+            <Td>3</Td>
+            <Td>CT Lungs</Td>
             <Td>16th Octover, 2022</Td>
             <Td>
-              <Tag bgColor='orange'>In Progress</Tag>
+              <Tag bgColor='lightgreen'>Completed</Tag>
             </Td>
+            <Td>Yes</Td>
+            <Td>Effusion</Td>
             <Td>
               <IconButton
                 variant='outline'

@@ -3,7 +3,7 @@ import { VStack, Flex, Box, Button } from "@chakra-ui/react";
 import { colorScheme } from "../../../constants/constants";
 const Stepper = (ProgressNumber, setProgressNumber) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
-    initialStep: 2,
+    initialStep: 4,
   });
 
   return (

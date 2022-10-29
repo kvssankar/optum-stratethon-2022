@@ -61,17 +61,17 @@ const ImmediateInfo = () => {
           <div className='md:w-3/5'>
             <Tag size='lg' colorScheme='blue' borderRadius='full'>
               <Avatar
-                src='https://bit.ly/sage-adebayo'
+                src='https://miro.medium.com/fit/c/176/176/1*Me-NpG_iqTztbbHYrCYBVw.jpeg'
                 size='xs'
                 name='Dr Prasad'
                 ml={-1}
                 mr={2}
               />
-              <TagLabel>Micheal Murthy</TagLabel>
+              <TagLabel>Sriesh Agrawal</TagLabel>
             </Tag>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+              Severe eye pain, maybe due to the ongoing diabetes and increase in
+              blood sugar levels. White film formation over eyelid/cornea
             </p>
           </div>
           <div className='flex flex-col items-center justify-center gap-y-2 md:w-2/5'>

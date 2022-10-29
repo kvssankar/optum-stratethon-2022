@@ -71,7 +71,7 @@ const ImmediateInfo = () => {
       <div className='flex flex-col w-full md:w-2/5 mb-6 border-2 border-blue-500 rounded-md'>
         <div className='flex justify-between w-full text-white bg-blue-500 py-1 px-2 '>
           <h1 className='font-semibold text-lg'>Session</h1>
-          <Tooltip label='12th October, 2021' placement='top-start'>
+          <Tooltip label='10th October, 2021' placement='top-start'>
             <Tag colorScheme={"teal"}>In Progress</Tag>
           </Tooltip>
         </div>
@@ -87,12 +87,12 @@ const ImmediateInfo = () => {
             <TagLabel>Dr Prasad</TagLabel>
           </Tag>
           <Tag variant='outline' colorScheme='blue'>
-            <TagLabel>Next Appointment on 2nd October, 2022</TagLabel>
+            <TagLabel>Next Appointment on 17nd October, 2022</TagLabel>
             <TagRightIcon as={MdCalendarToday} />
           </Tag>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+            Severe eye pain, maybe due to the ongoing diabetes and increase in
+            blood sugar levels. White film formation over eyelid/cornea
           </p>
         </div>
       </div>
