@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/kvssankar/siemens-backend#readme",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.190.0",
     "axios": "^1.1.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -25,6 +26,8 @@
     "generate-password": "^1.7.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.5",
+    "multer": "^1.4.5-lts.1",
+    "multer-s3": "^3.0.1",
     "nodemailer": "^6.8.0",
     "path": "^0.12.7"
   }

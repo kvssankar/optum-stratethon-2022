@@ -26,6 +26,7 @@ app.use("/api/patient", require("./routes/patient"));
 app.use("/api/doctor", require("./routes/doctor"));
 app.use("/api/record", require("./routes/record"));
 app.use("/api/session", require("./routes/session"));
+app.use("/api/upload", require("./routes/upload"));
 
 const connect = mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,

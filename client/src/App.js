@@ -80,7 +80,7 @@ function App() {
         element={!doctor ? <Navigate to='/' /> : <DoctorSession />}
       />
       <Route
-        path='/doctor/create-record/:pid'
+        path='/doctor/create-record/:pid/:sid'
         element={!doctor ? <Navigate to='/' /> : <CreateRecord />}
       />
       <Route

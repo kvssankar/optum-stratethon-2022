@@ -16,12 +16,6 @@ const sessionSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  records: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Record",
-    },
-  ],
   lab_tests: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Doctor = require("../models/Doctor");
+const Patient = require("../models/Patient");
 var generator = require("generate-password");
 const jwt = require("jsonwebtoken");
 const { sendmail } = require("../utils/sendmail");
@@ -49,7 +50,7 @@ router.post("/login", async (req, res) => {
   }
   if (req.body.otp !== doctor.otp) {
     //await Doctor.findByIdAndDelete(doctor._id);
-    res.status(500).json({ status: 1, mssg: "Incorrect OTP" });
+    return res.status(500).json({ status: 1, mssg: "Incorrect OTP" });
   }
   doctor.address = req.body.address;
   doctor.age = req.body.age;
@@ -64,6 +65,12 @@ router.post("changenotavailable", verify, async (req, res) => {
   const doctor = await Doctor.findById(req.body._id);
   doctor.not_available = req.body.not_available;
   await doctor.save();
+});
+
+router.get("/patient/:pid", verify, async (req, res) => {
+  console.log(req.params.pid);
+  const patient = await Patient.findById(req.params.pid);
+  res.json({ data: patient });
 });
 
 module.exports = router;

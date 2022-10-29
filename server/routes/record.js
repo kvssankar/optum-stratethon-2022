@@ -23,10 +23,18 @@ router.get("/patient/:pid/", async (req, res) => {
 });
 
 router.post("/create", verify, async (req, res) => {
+  console.log("&&&&&&&&&&&&&&&&&&&&&&&&");
+  console.log(req.body);
   const record = new Record({
     patient_id: req.body.patient_id,
     doctor_id: req.body.doctor_id,
-    file: [req.body.file],
+    session_id: req.body.session_id,
+    file: [
+      {
+        name: req.body.filename,
+        url: req.body.filelocation,
+      },
+    ],
     description: req.body.description,
   });
   try {
@@ -37,4 +45,15 @@ router.post("/create", verify, async (req, res) => {
   }
 });
 
+router.get("/get-sessions/:sid", async (req, res) => {
+  console.log("HERE GETTIGN DATA");
+  try {
+    const sessions = await Record.find({ session_id: req.params.sid }).populate(
+      "session_id"
+    );
+    return res.json(sessions);
+  } catch (err) {
+    console.log(err);
+  }
+});
 module.exports = router;

@@ -13,15 +13,7 @@ import { usePatientStore } from "../../../store/patientStore";
 import ComponentLoader from "../../Loader/ComponentLoader";
 
 const ImmediateInfo = (session_id) => {
-  const getParticularSession = usePatientStore(
-    (state) => state.getParticularSession
-  );
   const particularSession = usePatientStore((state) => state.particularSession);
-
-  useEffect(() => {
-    getParticularSession(session_id.session_id);
-    console.log(particularSession, "here yay");
-  }, []);
 
   return (
     <div className='flex flex-col items-center md:items-stretch md:flex-row  gap-x-5 w-full mt-5 mb-5'>
@@ -51,43 +43,30 @@ const ImmediateInfo = (session_id) => {
             <TabPanels>
               {particularSession ? (
                 <TabPanel>
-                  <div className='flex flex-col'>
-                    <div>
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>
-                          Patient Name -
-                        </span>{" "}
-                        {particularSession.patient_id.name}
-                      </p>
+                  <div className='grid md:grid-cols-2 justify-between items-start'>
+                    <div className='border-r-0 md:border-r-2 flex flex-col'>
+                      <div>
+                        <p>
+                          <span style={{ fontWeight: "bold" }}>
+                            Patient Name -
+                          </span>{" "}
+                          {particularSession.patient_id.name}
+                        </p>
+                      </div>
                       <p>
                         {" "}
                         <span style={{ fontWeight: "bold" }}>
-                          Patient Age -
+                          First Visit
                         </span>{" "}
-                        {particularSession.patient_id.age}
-                      </p>
+                        {particularSession.disease}
+                      </p>{" "}
                       <p>
-                        <span style={{ fontWeight: "bold" }}>
-                          Patient Email -
-                        </span>{" "}
+                        <span style={{ fontWeight: "bold" }}>Recent Visit</span>{" "}
+                        {moment(particularSession.started_at.date).calendar()}
                       </p>
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>
-                          Patient Address
-                        </span>{" "}
-                        {particularSession.patient_id.address}
-                      </p>
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>
-                          Chronic Diseases -
-                        </span>{" "}
-                        Blood Pressue, Diabetes, Sugar
-                      </p>
-                      {/* <hr></hr>
-                      <br></br>
-                      <hr></hr> */}
                     </div>
-                    <div>
+                    <div className='md:pl-5'>
+                      <hr className='md:hidden w-full mt-2 mb-2'></hr>{" "}
                       <p>
                         {" "}
                         <span style={{ fontWeight: "bold" }}>
@@ -95,22 +74,6 @@ const ImmediateInfo = (session_id) => {
                         </span>{" "}
                         {particularSession.description}
                       </p>
-                      <p>
-                        {" "}
-                        <span style={{ fontWeight: "bold" }}>
-                          Disease -
-                        </span>{" "}
-                        {particularSession.disease}
-                      </p>
-                      <div>
-                        {" "}
-                        <p>
-                          <span style={{ fontWeight: "bold" }}>
-                            Start Date -
-                          </span>{" "}
-                          {moment(particularSession.started_at.date).calendar()}
-                        </p>
-                      </div>
                     </div>
                   </div>
                 </TabPanel>

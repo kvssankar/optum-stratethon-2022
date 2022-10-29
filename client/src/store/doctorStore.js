@@ -7,8 +7,11 @@ const useStore = create(
     (set) => ({
       doctor: null,
       doctorSessions: [],
+      patient: null,
+      particularRecords: null,
       login: (email, otp) => {
         axios.post("/api/doctor/login", { email, otp }).then((res) => {
+          localStorage.setItem("auth-token", res.data.token);
           set({ doctor: res.data.data });
         });
       },
@@ -25,7 +28,7 @@ const useStore = create(
           })
           .then((res) => {
             set({ doctor: res.data.data });
-            localStorage.setItem("auth-token-doctor", res.data.token);
+            localStorage.setItem("auth-token", res.data.token);
           });
       },
       getOtp: async (email) => {
@@ -41,14 +44,29 @@ const useStore = create(
         const String = "/api/session/doctor/" + doctor_id;
         let config = {
           headers: {
-            "auth-token": localStorage.getItem("auth-token-doctor"),
+            "auth-token": localStorage.getItem("auth-token"),
           },
         };
         axios.get(String, config).then((res) => {
           set((state) => ({ doctorSessions: res.data.data }));
         });
       },
-      createRecord: (patient_id, description, doctor_id) => {
+      createRecord: (
+        patient_id,
+        session_id,
+        description,
+        filename,
+        filelocation,
+        doctor_id
+      ) => {
+        console.log(
+          patient_id,
+          session_id,
+          description,
+          filename,
+          filelocation,
+          doctor_id
+        );
         let config = {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),
@@ -57,21 +75,53 @@ const useStore = create(
         axios
           .post(
             "/api/record/create",
-            { patient_id, description, doctor_id },
+            {
+              patient_id,
+              session_id,
+              description,
+              filename,
+              filelocation,
+              doctor_id,
+            },
             config
           )
           .then((res) => {
+            console.log(res.data);
             console.log("record created");
           });
+      },
+      getPatient: (pid) => {
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        axios.get("/api/doctor/patient/" + pid, config).then((res) => {
+          console.log("HI", res.data);
+          set({ patient: res.data.data });
+        });
+      },
+      getRecordsBySessionId: (sid) => {
+        const uri = "/api/record/get-sessions/" + sid;
+        console.log("Getting sid here", uri);
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        axios.get(uri, config).then((res) => {
+          // console.log("HI here in getrecordsbysessionid", res.data);
+          set({ particularRecords: res.data });
+        });
       },
       logout: () => {
         let config = {
           headers: {
-            "auth-token": localStorage.getItem("auth-token-doctor"),
+            "auth-token": localStorage.getItem("auth-token"),
           },
         };
         set({ doctor: null });
-        localStorage.setItem("auth-token-doctor", null);
+        localStorage.setItem("auth-token", null);
       },
     }),
     {
