@@ -19,7 +19,7 @@ const ImmediateInfo = () => {
       {/* 1 */}
       <div className='hidden md:flex flex-row md:flex-col w-full md:w-1/5 mb-6 bg-blue-500 rounded-md justify-center items-center text-white pt-5 pb-5'>
         <img
-          src='https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4065730.png'
+          src='https://www.woodlandshospital.in/images/doctor-img/ravi-kant-saraogi.jpg'
           alt=''
           className='object-cover h-32 w-32 rounded-md bg-white'
         />

@@ -1,14 +1,10 @@
 import { Avatar, Tag, TagLabel, TagRightIcon, Tooltip } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdCalendarToday } from "react-icons/md";
 import { usePatientStore } from "../../../store/patientStore";
 
 const ImmediateInfo = () => {
   const patient = usePatientStore((state) => state.patient);
-  const chronicArray = [];
-  if (patient && patient.chronic_diseases) {
-    const chronicArray = Object.values(patient.chronic_diseases);
-  }
 
   return (
     <div className='flex flex-col items-center md:items-stretch md:flex-row  gap-x-5 w-full mt-5 mb-5'>
@@ -66,13 +62,9 @@ const ImmediateInfo = () => {
           Chronic Disease History
         </h1>
         <div className='flex flex-wrap gap-5 py-1 px-2 my-3'>
-          {chronicArray.map((obj) => (
+          {patient.chronic_diseases.map((obj) => (
             <Tag>{obj.disease}</Tag>
           ))}
-          <Tag>Sample Tag</Tag>
-          <Tag>Sample Tag</Tag>
-          <Tag>Sample Tag</Tag>
-          <Tag>Sample Tag</Tag>
         </div>
       </div>
       {/* 3 */}

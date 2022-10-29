@@ -1,5 +1,6 @@
 import React from "react";
 import { DownloadIcon } from "@chakra-ui/icons";
+import { FiDownload } from "react-icons/fi";
 import {
   Tag,
   Table,
@@ -11,9 +12,12 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  IconButton,
 } from "@chakra-ui/react";
 
 const AllSessionTable = () => {
+  const onButtonClick = () => {};
+
   return (
     <TableContainer border={"2px"} rounded='md' borderColor={"blue.500"}>
       <Table size='sm' variant='simple' colorScheme={"blue"}>
@@ -22,7 +26,6 @@ const AllSessionTable = () => {
             <Th isNumeric>Sno</Th>
             <Th>Name</Th>
             <Th>Date</Th>
-            <Th>Diseases</Th>
             <Th>Status</Th>
             <Th>Download</Th>
           </Tr>
@@ -31,37 +34,66 @@ const AllSessionTable = () => {
           <Tr>
             <Td>1</Td>
             <Td>Blood Test</Td>
-            <Td>5th Octover, 2022</Td>
-            <Td>Cholera Test</Td>
+            <Td>7th Octover, 2022</Td>
             <Td>
-              <Tag>Sample Tag</Tag>
+              <Tag bgColor='lightgreen'>Completed</Tag>
             </Td>
             <Td>
-              <DownloadIcon />
-            </Td>
-          </Tr>
-          <Tr>
-            <Td>1</Td>
-            <Td>Blood Test</Td>
-            <Td>5th Octover, 2022</Td>
-            <Td>Cholera Test</Td>
-            <Td>
-              <Tag bgColor='grey'>Sample Tag</Tag>
-            </Td>
-            <Td>
-              <DownloadIcon />
+              <IconButton
+                variant='outline'
+                aria-label='open menu'
+                icon={<FiDownload />}
+                onClick={() => onButtonClick()}
+              />
             </Td>
           </Tr>
           <Tr>
-            <Td>1</Td>
-            <Td>Blood Test</Td>
-            <Td>5th Octover, 2022</Td>
-            <Td>Cholera Test</Td>
+            <Td>2</Td>
+            <Td> MRI</Td>
+            <Td>9th Octover, 2022</Td>
             <Td>
-              <Tag>Sample Tag</Tag>
+              <Tag bgColor='lightgreen'>Completed</Tag>
             </Td>
             <Td>
-              <DownloadIcon />
+              <IconButton
+                variant='outline'
+                aria-label='open menu'
+                icon={<FiDownload />}
+                onClick={() => onButtonClick()}
+              />
+            </Td>
+          </Tr>
+
+          <Tr>
+            <Td>4</Td>
+            <Td>XRAY Chest</Td>
+            <Td>15th Octover, 2022</Td>
+            <Td>
+              <Tag bgColor='lightgreen'>Completed</Tag>
+            </Td>
+            <Td>
+              <IconButton
+                variant='outline'
+                aria-label='open menu'
+                icon={<FiDownload />}
+                onClick={() => onButtonClick()}
+              />
+            </Td>
+          </Tr>
+          <Tr>
+            <Td>4</Td>
+            <Td>XRAY Eye</Td>
+            <Td>16th Octover, 2022</Td>
+            <Td>
+              <Tag bgColor='orange'>In Progress</Tag>
+            </Td>
+            <Td>
+              <IconButton
+                variant='outline'
+                aria-label='open menu'
+                icon={<FiDownload />}
+                onClick={() => onButtonClick()}
+              />
             </Td>
           </Tr>
         </Tbody>

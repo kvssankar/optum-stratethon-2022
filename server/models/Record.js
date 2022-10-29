@@ -17,6 +17,11 @@ const RecordSchema = new mongoose.Schema({
     ref: "Patient",
     required: true,
   },
+  doctor_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "doctor",
+    required: true,
+  },
   description: {
     type: String,
   },

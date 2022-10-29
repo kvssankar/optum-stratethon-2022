@@ -48,6 +48,22 @@ const useStore = create(
           set((state) => ({ doctorSessions: [res.data.data] }));
         });
       },
+      createRecord: (patient_id, description, doctor_id) => {
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        axios
+          .post(
+            "/api/record/create",
+            { patient_id, description, doctor_id },
+            config
+          )
+          .then((res) => {
+            console.log("record created");
+          });
+      },
       logout: () => {
         let config = {
           headers: {

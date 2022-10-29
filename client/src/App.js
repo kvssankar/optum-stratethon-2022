@@ -1,6 +1,14 @@
 import React from "react";
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Navigate,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+import PerformLabTest from "./pages/Patient/performLabTest.js";
 import Session from "./pages/Patient/Session.js";
+import DoctorSession from "./pages/Doctor/DoctorSession.js";
 import TestProgress from "./pages/Patient/Testprogress";
 import LabTests from "./pages/Patient/LabTests";
 import PatientAuthentication from "./pages/Patient/Authentication";
@@ -36,6 +44,11 @@ function App() {
         path='/patient/create-session'
         element={!patient ? <Navigate to='/' /> : <CreateSession />}
       />
+
+      <Route
+        path='/session/:session_id'
+        element={!patient ? <Navigate to='/' /> : <Session />}
+      />
       <Route
         path='/session'
         element={!patient ? <Navigate to='/' /> : <Session />}
@@ -48,6 +61,10 @@ function App() {
         path='/labTests'
         element={!patient ? <Navigate to='/' /> : <LabTests />}
       />
+      <Route
+        path='/patient/perform-labtest'
+        element={!patient ? <Navigate to='/' /> : <PerformLabTest />}
+      />
 
       {/* DOCTOR */}
       <Route
@@ -59,6 +76,10 @@ function App() {
       <Route
         path='/doctor/authentication'
         element={doctor ? <Navigate to='/doctor' /> : <DoctorAuthentication />}
+      />
+      <Route
+        path='/doctor/session/:session_id2'
+        element={!patient ? <Navigate to='/' /> : <DoctorSession />}
       />
       <Route
         path='/doctor/create-record'

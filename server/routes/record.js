@@ -25,6 +25,7 @@ router.get("/patient/:pid/", async (req, res) => {
 router.post("/create", verify, async (req, res) => {
   const record = new Record({
     patient_id: req.body.patient_id,
+    doctor_id: req.body.doctor_id,
     file: [req.body.file],
     description: req.body.description,
   });

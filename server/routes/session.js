@@ -2,11 +2,18 @@ const router = require("express").Router();
 const Session = require("../models/Session");
 const Doctor = require("../models/Doctor");
 const Patient = require("../models/Patient");
+const LabTest = require("../models/labTest");
 const verify = require("../verify");
+const axios = require("axios").create();
 
-router.get("/:sid", verify, async (req, res) => {
+router.get("/:sid", async (req, res) => {
   try {
-    const session = await Session.find({ _id: req.params.sid });
+    const session = await Session.find({ _id: req.params.sid })
+      .populate("doctor_id")
+      .populate("patient_id");
+    console.log("**********************");
+    console.log(session, "here are sessions");
+    console.log("**********************");
     res.json({ data: session });
   } catch (err) {
     res.status(500).json({ status: 1, err });
@@ -30,7 +37,9 @@ router.post("/patient/getSessions/", verify, async (req, res) => {
     console.log(req.body.patient_id);
     const sessions = await Session.find({
       patient_id: req.body.patient_id,
-    });
+    })
+      .populate("doctor_id")
+      .populate("patient_id");
     console.log(sessions);
     res.json({ data: sessions });
   } catch (err) {
@@ -49,10 +58,14 @@ router.get("/doctor/:did/", verify, async (req, res) => {
 });
 
 router.post("/doctor/getSessions", async (req, res) => {
-  console.log("HI", req.body.doctor_id);
   try {
-    const sessions = await Session.find({ doctor_id: req.body.doctor_id });
+    const sessions = await Session.find({
+      doctor_id: req.body.doctor_id,
+    })
+      .populate("patient_id")
+      .populate("doctor_id");
     let date_ob = new Date();
+    console.log(sessions);
     res.json({ data: sessions, date: date_ob });
   } catch (err) {
     res.status(500).json({ status: 1, err });
@@ -70,8 +83,7 @@ router.post("/create", verify, async (req, res) => {
         },
       ],
     },
-    started_at: req.body.date,
-    time: Number(req.body.time),
+
     category: req.body.category,
   });
   console.log(doctors);
@@ -86,6 +98,8 @@ router.post("/create", verify, async (req, res) => {
     disease: req.body.disease,
     description: req.body.description,
     doctor_id: doctor._id,
+    started_at: req.body.date,
+    time: Number(req.body.time),
   });
   try {
     const savedSession = await session.save();
@@ -104,6 +118,47 @@ router.post("/end", async (req, res) => {
     res.json({ data: session });
   } catch (err) {
     res.status(500).json({ status: 1, err });
+  }
+});
+
+//lab test
+
+router.post("/labtest/perform", async (req, res) => {
+  try {
+    try {
+      const response = null;
+      if ((req.body.type = "eyes")) {
+        response = await axios({
+          url: "http://65.2.141.113:5000/eyes",
+          method: "post",
+        });
+        console.log("HI in if");
+      } else {
+        response = await axios({
+          url: "lungs",
+          method: "post",
+        });
+        console.log("HI in else");
+      }
+      const labTest = new LabTest({
+        name: req.body.name,
+        patient_id: req.body.patient_id,
+        fileUrl: req.body.fileUrl,
+        description: "Type number 1",
+        consultationRequired: "True",
+      });
+      console.log("HI2");
+      console.log(labTest);
+      console.log("H3");
+      console.log(response.data);
+      console.log("HI4");
+      const newLabTest = await labTest.save();
+      return res.json({ data: newLabTest });
+    } catch (err) {
+      return res.status(500).json({ message: err });
+    }
+  } catch (err) {
+    return res.status(500).json({ status: 1, err });
   }
 });
 

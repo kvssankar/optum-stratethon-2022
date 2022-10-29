@@ -9,6 +9,8 @@ const useStore = create(
     (set) => ({
       patient: null,
       sessions: [],
+      labTest: [],
+      particularSession: [],
       login: (email, otp) => {
         axios.post("/api/patient/login", { email, otp }).then((res) => {
           localStorage.setItem("auth-token", res.data.token);
@@ -54,6 +56,20 @@ const useStore = create(
             set((state) => ({ sessions: [...state.sessions, res.data.data] }));
           });
       },
+      getParticularSession: (session_id) => {
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        const x = "/api/session/" + session_id.session_id;
+        axios.get(x, config).then((res) => {
+          // console.log("here is data received", res.data.data[0]);
+          set((state) => ({
+            particularSession: [res.data.data[0]],
+          }));
+        });
+      },
       logout: () => {
         let config = {
           headers: {
@@ -73,6 +89,18 @@ const useStore = create(
         axios.post(String, { patient_id }, config).then((res) => {
           set((state) => ({ sessions: [res.data.data] }));
         });
+      },
+      performLabTest: (patient_id, name, fileUrl) => {
+        console.log("CHEK AT STORE", patient_id, name, fileUrl);
+        const String = "/api/session/labtest/perform";
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        axios
+          .post(String, { patient_id, name, fileUrl }, config)
+          .then((res) => {});
       },
     }),
     {

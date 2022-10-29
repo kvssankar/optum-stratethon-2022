@@ -22,17 +22,16 @@ import {
   times,
 } from "../../constants/globalconstants";
 import { usePatientStore } from "../../store/patientStore";
-import { useDoctorStore } from "../../store/doctorStore";
 import { useNavigate } from "react-router-dom";
 
-const CreateSession = () => {
+const PerformLabTest = () => {
+  const performLabTest = usePatientStore((state) => state.performLabTest);
+  const createSession = usePatientStore((state) => state.createSession);
+  const patient = usePatientStore((state) => state.patient);
+  const navigate = useNavigate();
   const [formData, setformData] = useState({
-    disease: "",
-    description: "",
-    category: "",
-    time: "",
-    date: "",
-    filename: "",
+    name: "",
+    fileUrl: "",
   });
 
   const onChange = (e) => {
@@ -41,14 +40,9 @@ const CreateSession = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    createRecord(patient._id, formData["description"], doctor._id);
   };
-  const createSession = usePatientStore((state) => state.createSession);
-  const createRecord = usePatientStore((state) => state.createRecord);
-  const doctor = useDoctorStore((state) => state.doctor);
-  const patient = usePatientStore((state) => state.patient);
-  const { disease, description, date, time, category, filename } = formData;
-  const navigate = useNavigate();
+  const { name, fileUrl } = formData;
+
   return (
     <div className='flex flex-col md:flex-row mx-5 '>
       <Sidebar />
@@ -60,7 +54,7 @@ const CreateSession = () => {
           className='w-4/5'
         >
           <h1 className='text-2xl text-blue-500 font-semibold mb-3 border-b-2 border-blue-500'>
-            Create a record for __PATIENTNAME__
+            Enter Nessesary Details
           </h1>
           <form
             className='form'
@@ -69,38 +63,27 @@ const CreateSession = () => {
           >
             <Stack spacing={4}>
               <FormControl>
-                <FormLabel>Prescription Content</FormLabel>
-                <Textarea
-                  type='text'
-                  placeholder='What was your evaluation and description of patient condition'
-                  name='description'
-                  value={description}
-                  onChange={(e) => onChange(e)}
-                  required
-                />
-              </FormControl>
-              <Text color='gray'>Please add any files if nessesary</Text>
-              <FormControl>
-                <FormLabel>File name</FormLabel>
+                <FormLabel>Name Of Test</FormLabel>
                 <Input
                   type='string'
-                  value={filename}
-                  onChange={(e) => {
-                    setformData({ ...formData, date: e.target.value });
-                  }}
+                  placeholder='Enter test name'
+                  name='name'
+                  value={name}
+                  onChange={(e) => onChange(e)}
+                  required
                 />
               </FormControl>
               <FormControl>
                 <FormLabel>File Url</FormLabel>
                 <Input
                   type='string'
-                  value={filename}
-                  placeholder='Please enter the file URL that you want to add'
-                  onChange={(e) => {
-                    setformData({ ...formData, date: e.target.value });
-                  }}
+                  name='fileUrl'
+                  value={fileUrl}
+                  placeholder='Enter file url of Scan'
+                  onChange={(e) => onChange(e)}
                 />
               </FormControl>
+
               <Stack spacing={10}>
                 <Button
                   bg={"blue.400"}
@@ -110,14 +93,9 @@ const CreateSession = () => {
                   }}
                   type='submit'
                   onClick={async () => {
-                    await createSession(
-                      description,
-                      disease,
-                      category,
-                      date,
-                      time
-                    );
-                    //navigate("/patient");
+                    console.log("CHeCLING HERE", patient._id, name, fileUrl);
+                    await performLabTest(patient._id, name, fileUrl);
+                    navigate("/labTests");
                   }}
                 >
                   CREATE
@@ -131,4 +109,4 @@ const CreateSession = () => {
   );
 };
 
-export default CreateSession;
+export default PerformLabTest;

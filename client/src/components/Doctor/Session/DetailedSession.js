@@ -19,7 +19,7 @@ const ImmediateInfo = (session_id) => {
 
   useEffect(() => {
     getParticularSession(session_id);
-    console.log(particularSession[0]);
+    console.log(particularSession[0], "here yay");
   }, []);
 
   return (
@@ -32,8 +32,8 @@ const ImmediateInfo = (session_id) => {
           </div>
 
           {/* <Tooltip label='12th October, 2021' placement='top-start'>
-            <Tag colorScheme={"teal"}>In Progress</Tag>
-          </Tooltip> */}
+              <Tag colorScheme={"teal"}>In Progress</Tag>
+            </Tooltip> */}
         </div>
         <div className=' gap-5  py-3 px-2'>
           <Tabs
@@ -53,23 +53,34 @@ const ImmediateInfo = (session_id) => {
                   {particularSession[0].doctor_id && (
                     <div>
                       <p>
+                        <span style={{ fontWeight: "bold" }}>
+                          Patient Name -
+                        </span>{" "}
+                        {particularSession[0].patient_id.name}
+                      </p>
+                      <p>
                         {" "}
                         <span style={{ fontWeight: "bold" }}>
-                          Doctor Name -
+                          Patient Age -
                         </span>{" "}
-                        {particularSession[0].doctor_id.name}
+                        {particularSession[0].patient_id.age}
                       </p>
                       <p>
                         <span style={{ fontWeight: "bold" }}>
-                          Doctor Specialization -
-                        </span>
-                        {particularSession[0].doctor_id.category}
+                          Patient Email -
+                        </span>{" "}
                       </p>
                       <p>
                         <span style={{ fontWeight: "bold" }}>
-                          Doctor Email -
-                        </span>
-                        {particularSession[0].doctor_id.email}
+                          Patient Address
+                        </span>{" "}
+                        {particularSession[0].patient_id.address}
+                      </p>
+                      <p>
+                        <span style={{ fontWeight: "bold" }}>
+                          Chronic Diseases -
+                        </span>{" "}
+                        Blood Pressue, Diabetes, Sugar
                       </p>
                       <hr></hr>
                       <br></br>
@@ -79,11 +90,17 @@ const ImmediateInfo = (session_id) => {
                   {particularSession[0] && (
                     <div>
                       <p>
-                        <span style={{ fontWeight: "bold" }}>Description</span>{" "}
+                        {" "}
+                        <span style={{ fontWeight: "bold" }}>
+                          Description -
+                        </span>{" "}
                         {particularSession[0].description}
                       </p>
                       <p>
-                        <span style={{ fontWeight: "bold" }}>Disease -</span>{" "}
+                        {" "}
+                        <span style={{ fontWeight: "bold" }}>
+                          Disease -
+                        </span>{" "}
                         {particularSession[0].disease}
                       </p>
                       {particularSession[0].started_at && (
@@ -91,7 +108,7 @@ const ImmediateInfo = (session_id) => {
                           {" "}
                           <p>
                             <span style={{ fontWeight: "bold" }}>
-                              Start Date
+                              Start Date -
                             </span>{" "}
                             {particularSession[0].started_at.substring(0, 10)}
                           </p>

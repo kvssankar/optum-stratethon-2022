@@ -27,7 +27,7 @@ import { ReactText } from "react";
 
 const LinkItems = [
   { name: "Profile", icon: FiHome, link: "/" },
-  { name: "Session", icon: FiTrendingUp, link: "/session" },
+  // { name: "Session", icon: FiTrendingUp, link: "/session" },
   { name: "Lab Tests", icon: FiCompass, link: "/labTests" },
   { name: "Tests progress", icon: FiStar, link: "/testProgress" },
   { name: "Edit Details", icon: FiSettings, link: "/session" },
