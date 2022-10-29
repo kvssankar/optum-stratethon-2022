@@ -7,18 +7,11 @@ import {
   Tag,
   Tooltip,
 } from "@chakra-ui/react";
-import { Document, Page } from "react-pdf";
 import React, { useState } from "react";
 
 const ImmediateInfo = () => {
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
   return (
     <div className='flex flex-col items-center md:items-stretch md:flex-row  gap-x-5 w-full mt-5 mb-5'>
-      {/* 3 */}
       <div className='flex flex-col w-full md:w-full mb-6 border-2 border-blue-500 rounded-md'>
         <div className='flex flex-col md:flex-row items-center justify-center md:justify-between w-full text-white bg-blue-500 py-1 px-2 '>
           <div className='flex items-center pb-2 md:pb-0 '>
@@ -57,7 +50,7 @@ const ImmediateInfo = () => {
               </TabPanel>
               <TabPanel>
                 <div>
-                  <div>
+                  {/* <div>
                     <Document
                       file='./sample.pdf'
                       onLoadSuccess={onDocumentLoadSuccess}
@@ -67,9 +60,10 @@ const ImmediateInfo = () => {
                     <p>
                       Page {pageNumber} of {numPages}
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               </TabPanel>
+              <TabPanel></TabPanel>
             </TabPanels>
           </Tabs>
         </div>

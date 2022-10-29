@@ -10,12 +10,6 @@ const sessionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Doctor",
   },
-  disease: {
-    type: String,
-  },
-  description: {
-    type: String,
-  },
   records: [
     {
       type: mongoose.Schema.Types.ObjectId,
