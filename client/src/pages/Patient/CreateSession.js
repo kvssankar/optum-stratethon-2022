@@ -76,26 +76,26 @@ const CreateSession = () => {
               <FormControl>
                 <FormLabel>Disease</FormLabel>
                 <Select
-                  value={disease}
+                  placeholder="Select Disease"
                   onChange={(e) => {
                     setformData({ ...formData, disease: e.target.value });
                   }}
                 >
-                  {Object.keys(diseases).map((disease) => (
-                    <option value={disease}>{disease}</option>
+                  {Object.keys(diseases).map((d) => (
+                    <option value={d}>{d}</option>
                   ))}
                 </Select>
               </FormControl>
               <FormControl>
                 <FormLabel>Category</FormLabel>
                 <Select
-                  value={category}
+                  placeholder="Select the category"
                   onChange={(e) => {
                     setformData({ ...formData, category: e.target.value });
                   }}
                 >
-                  {doctor_categories.map((category) => (
-                    <option value={category}>{category}</option>
+                  {doctor_categories.map((c) => (
+                    <option value={c}>{c}</option>
                   ))}
                 </Select>
               </FormControl>
@@ -112,7 +112,7 @@ const CreateSession = () => {
               <FormControl>
                 <FormLabel>Time</FormLabel>
                 <Select
-                  value={time}
+                  placeholder="Select the time"
                   onChange={(e) => {
                     setformData({ ...formData, time: e.target.value });
                   }}
@@ -131,6 +131,26 @@ const CreateSession = () => {
                   }}
                   type="submit"
                   onClick={async () => {
+                    if (
+                      !disease ||
+                      !description ||
+                      !date ||
+                      !time ||
+                      !category
+                    ) {
+                      alert(
+                        time +
+                          " " +
+                          date +
+                          " " +
+                          category +
+                          " " +
+                          disease +
+                          " " +
+                          description
+                      );
+                      return;
+                    }
                     await createSession(
                       description,
                       disease,
@@ -138,7 +158,7 @@ const CreateSession = () => {
                       date,
                       time
                     );
-                    //navigate("/patient");
+                    navigate("/patient");
                   }}
                 >
                   CREATE

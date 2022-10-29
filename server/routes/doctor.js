@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
     }
   }
   if (req.body.otp !== doctor.otp) {
-    await Doctor.findByIdAndDelete(doctor._id);
+    //await Doctor.findByIdAndDelete(doctor._id);
     res.status(500).json({ status: 1, mssg: "Incorrect OTP" });
   }
   doctor.address = req.body.address;

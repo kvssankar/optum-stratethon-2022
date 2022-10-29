@@ -25,8 +25,6 @@ function App() {
 
   const patient = usePatientStore((state) => state.patient);
   const doctor = useDoctorStore((state) => state.doctor);
-  console.log("PATIENT", patient);
-  console.log("DOCTOR", doctor);
   return (
     <Routes>
       {/* PATIENT */}
@@ -79,10 +77,10 @@ function App() {
       />
       <Route
         path='/doctor/session/:session_id2'
-        element={!patient ? <Navigate to='/' /> : <DoctorSession />}
+        element={!doctor ? <Navigate to='/' /> : <DoctorSession />}
       />
       <Route
-        path='/doctor/create-record'
+        path='/doctor/create-record/:pid'
         element={!doctor ? <Navigate to='/' /> : <CreateRecord />}
       />
       <Route

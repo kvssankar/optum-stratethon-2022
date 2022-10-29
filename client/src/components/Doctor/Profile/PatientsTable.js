@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiNavigation } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 import {
   Table,
   Thead,
@@ -13,6 +14,7 @@ import {
   TableContainer,
   IconButton,
 } from "@chakra-ui/react";
+import ComponentLoader from "../../Loader/ComponentLoader";
 import { useDoctorStore } from "../../../store/doctorStore";
 import { times } from "../../../constants/globalconstants";
 
@@ -24,13 +26,10 @@ const PatientsTable = () => {
   };
   const doctor = useDoctorStore((state) => state.doctor);
   const doctorSessions = useDoctorStore((state) => state.doctorSessions);
-  const getDoctorSessions = useDoctorStore((state) => state.getDoctorSessions);
-  function getDoctorSessionsFunction() {
-    getDoctorSessions(doctor._id);
-  }
+  // console.log(doctorSessions[0].patient_id["name"]);
+
   useEffect(() => {
-    getDoctorSessionsFunction(doctor._id);
-    console.log(doctorSessions[0]);
+    console.log(doctorSessions);
   }, []);
 
   return (
@@ -47,37 +46,30 @@ const PatientsTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {doctorSessions[0].map((session) => (
-            <Tr>
-              <Td>1</Td>
-              <Td>
-                {session.patient_id["name"] && session.patient_id["name"]}
-              </Td>
-              <Td>
-                {session.started_at ? session.started_at.substring(0, 10) : "-"}
-              </Td>
-              <Td>{session.disease ? session.disease : "-"}</Td>
-              <Td>{session.description ? session.description : "-"}</Td>
+          {doctorSessions ? (
+            doctorSessions.map((session) => (
+              <Tr>
+                <Td>1</Td>
+                <Td>{session.patient_id["name"]}</Td>
+                <Td>{moment(session.started_at.date).calendar()}</Td>
+                <Td>{session.disease}</Td>
+                <Td>{session.description}</Td>
 
-              <Td>
-                {" "}
-                <IconButton
-                  variant='outline'
-                  aria-label='open menu'
-                  icon={<FiNavigation />}
-                  onClick={() => onButtonClick(session._id)}
-                />
-              </Td>
-            </Tr>
-          ))}
+                <Td>
+                  {" "}
+                  <IconButton
+                    variant='outline'
+                    aria-label='open menu'
+                    icon={<FiNavigation />}
+                    onClick={() => onButtonClick(session._id)}
+                  />
+                </Td>
+              </Tr>
+            ))
+          ) : (
+            <ComponentLoader />
+          )}
         </Tbody>
-        {/* <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Tfoot> */}
       </Table>
     </TableContainer>
   );

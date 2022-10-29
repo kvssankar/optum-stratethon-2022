@@ -7,9 +7,10 @@ import {
   Tag,
   Tooltip,
 } from "@chakra-ui/react";
-
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { usePatientStore } from "../../../store/patientStore";
+import ComponentLoader from "../../Loader/ComponentLoader";
 
 const ImmediateInfo = (session_id) => {
   const getParticularSession = usePatientStore(
@@ -18,8 +19,8 @@ const ImmediateInfo = (session_id) => {
   const particularSession = usePatientStore((state) => state.particularSession);
 
   useEffect(() => {
-    getParticularSession(session_id);
-    console.log(particularSession[0], "here yay");
+    getParticularSession(session_id.session_id);
+    console.log(particularSession, "here yay");
   }, []);
 
   return (
@@ -48,22 +49,22 @@ const ImmediateInfo = (session_id) => {
               <Tab>Tests</Tab>
             </TabList>
             <TabPanels>
-              <TabPanel>
-                <div className='flex flex-col'>
-                  {particularSession[0].doctor_id && (
+              {particularSession ? (
+                <TabPanel>
+                  <div className='flex flex-col'>
                     <div>
                       <p>
                         <span style={{ fontWeight: "bold" }}>
                           Patient Name -
                         </span>{" "}
-                        {particularSession[0].patient_id.name}
+                        {particularSession.patient_id.name}
                       </p>
                       <p>
                         {" "}
                         <span style={{ fontWeight: "bold" }}>
                           Patient Age -
                         </span>{" "}
-                        {particularSession[0].patient_id.age}
+                        {particularSession.patient_id.age}
                       </p>
                       <p>
                         <span style={{ fontWeight: "bold" }}>
@@ -74,7 +75,7 @@ const ImmediateInfo = (session_id) => {
                         <span style={{ fontWeight: "bold" }}>
                           Patient Address
                         </span>{" "}
-                        {particularSession[0].patient_id.address}
+                        {particularSession.patient_id.address}
                       </p>
                       <p>
                         <span style={{ fontWeight: "bold" }}>
@@ -82,42 +83,40 @@ const ImmediateInfo = (session_id) => {
                         </span>{" "}
                         Blood Pressue, Diabetes, Sugar
                       </p>
-                      <hr></hr>
+                      {/* <hr></hr>
                       <br></br>
-                      <hr></hr>
+                      <hr></hr> */}
                     </div>
-                  )}
-                  {particularSession[0] && (
                     <div>
                       <p>
                         {" "}
                         <span style={{ fontWeight: "bold" }}>
                           Description -
                         </span>{" "}
-                        {particularSession[0].description}
+                        {particularSession.description}
                       </p>
                       <p>
                         {" "}
                         <span style={{ fontWeight: "bold" }}>
                           Disease -
                         </span>{" "}
-                        {particularSession[0].disease}
+                        {particularSession.disease}
                       </p>
-                      {particularSession[0].started_at && (
-                        <div>
-                          {" "}
-                          <p>
-                            <span style={{ fontWeight: "bold" }}>
-                              Start Date -
-                            </span>{" "}
-                            {particularSession[0].started_at.substring(0, 10)}
-                          </p>
-                        </div>
-                      )}
+                      <div>
+                        {" "}
+                        <p>
+                          <span style={{ fontWeight: "bold" }}>
+                            Start Date -
+                          </span>{" "}
+                          {moment(particularSession.started_at.date).calendar()}
+                        </p>
+                      </div>
                     </div>
-                  )}
-                </div>
-              </TabPanel>
+                  </div>
+                </TabPanel>
+              ) : (
+                <ComponentLoader />
+              )}
               <TabPanel>
                 <div className='flex flex-col md:flex-row justify-center items-center'>
                   <div className='pdf mr-10'>

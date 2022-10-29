@@ -69,6 +69,10 @@ const SimpleCard = () => {
       }
     } else if (progress === 2) {
       try {
+        if (!name || !email || !otp || !address || !age || !gender) {
+          alert("Please fill all the fields");
+          return;
+        }
         await register(name, email, address, age, gender, otp);
         navigate("/patient");
       } catch (err) {
@@ -86,7 +90,7 @@ const SimpleCard = () => {
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Sign in to your account</Heading>
-          <Heading color='gray' fontSize={"xl"}>
+          <Heading color="gray" fontSize={"xl"}>
             (Patient Login)
           </Heading>
         </Stack>
@@ -97,17 +101,17 @@ const SimpleCard = () => {
           p={8}
         >
           <form
-            className='form'
-            action='create-profile.html'
+            className="form"
+            action="create-profile.html"
             onSubmit={(e) => onSubmit(e)}
           >
             <Stack spacing={4}>
-              <FormControl id='email'>
+              <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
                 <Input
-                  type='email'
-                  placeholder='Email ID'
-                  name='email'
+                  type="email"
+                  placeholder="Email ID"
+                  name="email"
                   value={email}
                   onChange={(e) => onChange(e)}
                   required
@@ -116,12 +120,12 @@ const SimpleCard = () => {
 
               {/* FORM PART 1 */}
               {progress == 1 && (
-                <FormControl id='otp'>
+                <FormControl id="otp">
                   <FormLabel>OTP</FormLabel>
                   <Input
-                    type='text'
-                    placeholder='Enter your OTP'
-                    name='otp'
+                    type="text"
+                    placeholder="Enter your OTP"
+                    name="otp"
                     value={otp}
                     onChange={(e) => onChange(e)}
                   />
@@ -130,48 +134,48 @@ const SimpleCard = () => {
 
               {/* FORM PART 2 */}
               {progress == 2 && (
-                <FormControl id='name'>
+                <FormControl id="name">
                   <FormLabel>Name</FormLabel>
                   <Input
-                    type='string'
-                    placeholder='Name'
-                    name='name'
+                    type="string"
+                    placeholder="Name"
+                    name="name"
                     value={name}
                     onChange={(e) => onChange(e)}
                   />
                 </FormControl>
               )}
               {progress == 2 && (
-                <FormControl id='age'>
+                <FormControl id="age">
                   <FormLabel>Age</FormLabel>
                   <Input
-                    type='string'
-                    placeholder='Age'
-                    name='age'
+                    type="string"
+                    placeholder="Age"
+                    name="age"
                     value={age}
                     onChange={(e) => onChange(e)}
                   />
                 </FormControl>
               )}
               {progress == 2 && (
-                <FormControl id='address'>
+                <FormControl id="address">
                   <FormLabel>Address</FormLabel>
                   <Input
-                    type='string'
-                    placeholder='Address'
-                    name='address'
+                    type="string"
+                    placeholder="Address"
+                    name="address"
                     value={address}
                     onChange={(e) => onChange(e)}
                   />
                 </FormControl>
               )}
               {progress == 2 && (
-                <FormControl id='gender'>
+                <FormControl id="gender">
                   <FormLabel>Gender</FormLabel>
                   <Input
-                    type='string'
-                    placeholder='gender'
-                    name='gender'
+                    type="string"
+                    placeholder="gender"
+                    name="gender"
                     value={gender}
                     onChange={(e) => onChange(e)}
                   />
@@ -192,7 +196,7 @@ const SimpleCard = () => {
                   _hover={{
                     bg: "blue.500",
                   }}
-                  type='submit'
+                  type="submit"
                   onClick={action}
                 >
                   {progress == 0 && "SEND OTP"}

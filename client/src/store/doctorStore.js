@@ -38,14 +38,14 @@ const useStore = create(
         return flag;
       },
       getDoctorSessions: (doctor_id) => {
-        const String = "/api/session/doctor/getSessions";
+        const String = "/api/session/doctor/" + doctor_id;
         let config = {
           headers: {
             "auth-token": localStorage.getItem("auth-token-doctor"),
           },
         };
-        axios.post(String, { doctor_id }, config).then((res) => {
-          set((state) => ({ doctorSessions: [res.data.data] }));
+        axios.get(String, config).then((res) => {
+          set((state) => ({ doctorSessions: res.data.data }));
         });
       },
       createRecord: (patient_id, description, doctor_id) => {

@@ -54,6 +54,9 @@ const useStore = create(
           )
           .then((res) => {
             set((state) => ({ sessions: [...state.sessions, res.data.data] }));
+          })
+          .catch((err) => {
+            alert(err.response.data.msg);
           });
       },
       getParticularSession: (session_id) => {
@@ -64,14 +67,18 @@ const useStore = create(
         };
         const x = "/api/session/" + session_id;
         axios.get(x, config).then((res) => {
-          console.log("patientstore check", res.data.data);
           set((state) => ({
             particularSession: res.data.data,
           }));
         });
       },
       logout: () => {
-        set({ patient: null });
+        set({
+          patient: null,
+          sessions: [],
+          labTests: [],
+          particularSession: null,
+        });
         localStorage.setItem("auth-token", null);
       },
       getPatientSessions: (patient_id) => {
@@ -82,12 +89,10 @@ const useStore = create(
           },
         };
         axios.get(url, config).then((res) => {
-          // console.log("here is x", res.data.data);
           set((state) => ({ sessions: res.data.data }));
         });
       },
       performLabTest: (patient_id, name, fileUrl) => {
-        console.log("CHEK AT STORE", patient_id, name, fileUrl);
         const String = "/api/session/labtest/perform";
         let config = {
           headers: {
@@ -99,7 +104,6 @@ const useStore = create(
           .then((res) => {});
       },
       getLabTests: (patient_id) => {
-        console.log("CHEK AT STORE", patient_id);
         const String = "/api/session/labtests/get";
         let config = {
           headers: {

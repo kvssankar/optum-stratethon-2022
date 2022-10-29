@@ -20,7 +20,6 @@ const ImmediateInfo = (session_id) => {
 
   useEffect(() => {
     getParticularSession(session_id.session_id);
-    console.log("testing here", particularSession);
   }, []);
 
   return particularSession ? (
