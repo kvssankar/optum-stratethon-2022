@@ -11,14 +11,9 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Select,
 } from "@chakra-ui/react";
-import {
-  diseases,
-  doctor_categories,
-  times,
-} from "../../constants/globalconstants";
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDoctorStore } from "../../store/doctorStore";
 
@@ -92,9 +87,6 @@ const SimpleCard = () => {
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Sign in to your account</Heading>
-          <Heading color='gray' fontSize={"1xl"}>
-            (As a DOCTOR)
-          </Heading>
         </Stack>
         <Box
           rounded={"lg"}
@@ -184,21 +176,15 @@ const SimpleCard = () => {
                 </FormControl>
               )}
               {progress == 2 && (
-                <FormControl>
+                <FormControl id='category'>
                   <FormLabel>Category</FormLabel>
-                  <Select
+                  <Input
+                    type='string'
+                    placeholder='Select Category'
+                    name='category'
                     value={category}
-                    onChange={(e) => {
-                      setformData({ ...formData, category: e.target.value });
-                    }}
-                  >
-                    {doctor_categories.map((category) => (
-                      <option value={category}>{category}</option>
-                    ))}
-                    <option default hidden selected value=''>
-                      Please Select Category
-                    </option>
-                  </Select>
+                    onChange={(e) => onChange(e)}
+                  />
                 </FormControl>
               )}
               <Stack spacing={10}>

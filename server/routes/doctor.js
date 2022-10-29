@@ -55,9 +55,8 @@ router.post("/login", async (req, res) => {
   doctor.age = req.body.age;
   doctor.name = req.body.name;
   doctor.category = req.body.category;
-  doctor.gender = req.body.gender;
   doctor = await doctor.save();
-  return res.json({ data: doctor, token });
+  res.json({ data: doctor, token });
 });
 
 router.post("changenotavailable", verify, async (req, res) => {

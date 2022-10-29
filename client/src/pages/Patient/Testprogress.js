@@ -8,12 +8,10 @@ const Session = () => {
   return (
     <div className='flex flex-col md:flex-row '>
       <Sidebar />
-      <div className='flex  justify-center items-center mt-10'>
-        <ProgressBar
-          ProgressNumber={ProgressNumber}
-          setProgressNumber={setProgressNumber}
-        />
-      </div>
+      <ProgressBar
+        ProgressNumber={ProgressNumber}
+        setProgressNumber={setProgressNumber}
+      />
     </div>
   );
 };

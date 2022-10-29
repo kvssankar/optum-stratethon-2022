@@ -54,9 +54,8 @@ router.post("/login", async (req, res) => {
   patient.address = req.body.address;
   patient.age = req.body.age;
   patient.name = req.body.name;
-  patient.gender = req.body.gender;
   patient = await patient.save();
-  return res.json({ data: patient, token });
+  res.json({ data: patient, token });
 });
 
 module.exports = router;
