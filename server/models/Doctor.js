@@ -32,6 +32,9 @@ const doctorSchema = new mongoose.Schema({
   otp: {
     type: String,
   },
+  gender: {
+    type: String,
+  },
 });
 
 const Doctor = mongoose.model("Doctor", doctorSchema);

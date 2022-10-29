@@ -7,6 +7,7 @@ const useStore = create(
   persist(
     (set) => ({
       patient: null,
+      sessions: [],
       login: (email, otp) => {
         axios.post("/api/patient/login", { email, otp }).then((res) => {
           set({ patient: res.data });
@@ -35,6 +36,22 @@ const useStore = create(
         });
 
         return flag;
+      },
+      createSession: (description, disease, category, date, time) => {
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        axios
+          .post(
+            "/api/session/create",
+            { description, disease, category, date, time },
+            config
+          )
+          .then((res) => {
+            set((state) => ({ sessions: [...state.sessions, res.data.data] }));
+          });
       },
     }),
     {

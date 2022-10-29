@@ -26,7 +26,7 @@ export const lab_tests = [
   "X-RAY CHEST",
 ];
 
-const diseases = {
+export const diseases = {
   CANCER: true,
   DIABETES: true,
   "HEART DISEASE": true,
@@ -66,57 +66,29 @@ const diseases = {
   "ACUTE BRONCHITIS": false,
 };
 
-export const getTimeFromCalender = (num) => {
-  switch (num) {
-    case 0:
-      return "9:00 AM to 9.30 AM";
-    case 1:
-      return "9:30 AM to 10.00 AM";
-    case 2:
-      return "10:00 AM to 10.30 AM";
-    case 3:
-      return "10:30 AM to 11.00 AM";
-    case 4:
-      return "11:00 AM to 11.30 AM";
-    case 5:
-      return "11:30 AM to 12.00 PM";
-    case 6:
-      return "12:00 PM to 12.30 PM";
-    case 7:
-      return "12:30 PM to 1.00 PM";
-    case 8:
-      return "1:00 PM to 1.30 PM";
-    case 9:
-      return "1:30 PM to 2.00 PM";
-    case 10:
-      return "2:00 PM to 2.30 PM";
-    case 11:
-      return "2:30 PM to 3.00 PM";
-    case 12:
-      return "3:00 PM to 3.30 PM";
-    case 13:
-      return "3:30 PM to 4.00 PM";
-    case 14:
-      return "4:00 PM to 4.30 PM";
-    case 15:
-      return "4:30 PM to 5.00 PM";
-    case 16:
-      return "5:00 PM to 5.30 PM";
-    case 17:
-      return "5:30 PM to 6.00 PM";
-    case 18:
-      return "6:00 PM to 6.30 PM";
-    case 19:
-      return "6:30 PM to 7.00 PM";
-    case 20:
-      return "7:00 PM to 7.30 PM";
-    case 21:
-      return "7:30 PM to 8.00 PM";
-    case 22:
-      return "8:00 PM to 8.30 PM";
-    case 23:
-      return "8:30 PM to 9.00 PM";
-    default:
-      return "NONE";
-  }
+export const times = {
+  0: "9:00 AM to 9.30 AM",
+  1: "9:30 AM to 10.00 AM",
+  2: "10:00 AM to 10.30 AM",
+  3: "10:30 AM to 11.00 AM",
+  4: "11:00 AM to 11.30 AM",
+  5: "11:30 AM to 12.00 PM",
+  6: "12:00 PM to 12.30 PM",
+  7: "12:30 PM to 1.00 PM",
+  8: "1:00 PM to 1.30 PM",
+  9: "1:30 PM to 2.00 PM",
+  10: "2:00 PM to 2.30 PM",
+  11: "2:30 PM to 3.00 PM",
+  12: "3:00 PM to 3.30 PM",
+  13: "3:30 PM to 4.00 PM",
+  14: "4:00 PM to 4.30 PM",
+  15: "4:30 PM to 5.00 PM",
+  16: "5:00 PM to 5.30 PM",
+  17: "5:30 PM to 6.00 PM",
+  18: "6:00 PM to 6.30 PM",
+  19: "6:30 PM to 7.00 PM",
+  20: "7:00 PM to 7.30 PM",
+  21: "7:30 PM to 8.00 PM",
+  22: "8:00 PM to 8.30 PM",
+  23: "8:30 PM to 9.00 PM",
 };

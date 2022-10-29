@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const Session = require("../models/Session");
+const Doctor = require("../models/Doctor");
+const Patient = require("../models/Patient");
 const verify = require("../verify");
 
 router.get("/:sid", verify, async (req, res) => {

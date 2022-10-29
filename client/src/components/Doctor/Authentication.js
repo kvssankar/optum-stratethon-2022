@@ -11,8 +11,13 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  Select,
 } from "@chakra-ui/react";
-import axios from "axios";
+import {
+  diseases,
+  doctor_categories,
+  times,
+} from "../../constants/globalconstants";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDoctorStore } from "../../store/doctorStore";
@@ -176,15 +181,21 @@ const SimpleCard = () => {
                 </FormControl>
               )}
               {progress == 2 && (
-                <FormControl id='category'>
+                <FormControl>
                   <FormLabel>Category</FormLabel>
-                  <Input
-                    type='string'
-                    placeholder='Select Category'
-                    name='category'
+                  <Select
                     value={category}
-                    onChange={(e) => onChange(e)}
-                  />
+                    onChange={(e) => {
+                      setformData({ ...formData, category: e.target.value });
+                    }}
+                  >
+                    {doctor_categories.map((category) => (
+                      <option value={category}>{category}</option>
+                    ))}
+                    <option default hidden selected value=''>
+                      Please Select Category
+                    </option>
+                  </Select>
                 </FormControl>
               )}
               <Stack spacing={10}>

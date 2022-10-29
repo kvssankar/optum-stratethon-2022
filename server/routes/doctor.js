@@ -55,6 +55,7 @@ router.post("/login", async (req, res) => {
   doctor.age = req.body.age;
   doctor.name = req.body.name;
   doctor.category = req.body.category;
+  doctor.gender = req.body.gender;
   doctor = await doctor.save();
   res.json({ data: doctor, token });
 });
