@@ -19,7 +19,6 @@ const sendmail = (email, subject, message) => {
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
-      throw new Error("something went wrong");
     }
   });
 };

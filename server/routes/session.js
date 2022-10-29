@@ -1,57 +1,53 @@
 const router = require("express").Router();
 const Session = require("../models/Session");
+const verify = require("../verify");
 
-router.get("/:sid", async (req, res) => {
+router.get("/:sid", verify, async (req, res) => {
   try {
     const session = await Session.find({ _id: req.params.sid });
-    res.json(session);
+    res.json({ data: session });
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }
 });
 
-router.get("/patient/:pid/", async (req, res) => {
+router.get("/patient/:pid/", verify, async (req, res) => {
   try {
-    const session = await Session.find({
+    const sessions = await Session.find({
       patient_id: req.params.pid,
     });
-    res.json(session);
+    res.json({ data: sessions });
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }
 });
 
-router.get("/doctor/:did/", async (req, res) => {
+router.get("/doctor/:did/", verify, async (req, res) => {
   try {
-    const session = await Session.find({ doctor_id: req.params.did });
-    res.json(session);
+    const sessions = await Session.find({ doctor_id: req.params.did });
+    res.json({ data: sessions });
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create", verify, async (req, res) => {
+  const doctors = await Doctor.find({
+    not_available: {
+      $nin: [{ date: req.body.date, time: req.body.time }],
+    },
+    category: req.body.category,
+  });
+  const doctor = doctors[Math.floor(Math.random() * doctors.length)];
   const session = new Session({
-    patient_id: req.body.patient_id,
-    time: req.body.time,
-    date: req.body.date,
-    status: req.body.status,
+    patient_id: req.user._id,
+    disease: req.body.disease,
+    description: req.body.description,
+    doctor_id: doctor._id,
   });
   try {
     const savedSession = await session.save();
-    res.json(savedSession);
-  } catch (err) {
-    res.status(500).json({ status: 1, err });
-  }
-});
-
-router.post("/assigndoctor", async (req, res) => {
-  try {
-    const session = await Session.updateOne(
-      { _id: req.body.session_id },
-      { $set: { doctor_id: req.body.doctor_id } }
-    );
-    res.json(session);
+    res.json({ data: savedSession });
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }
@@ -63,7 +59,7 @@ router.post("/end", async (req, res) => {
       { _id: req.body.session_id },
       { $set: { ended_at: Date.now() } }
     );
-    res.json(session);
+    res.json({ data: session });
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }

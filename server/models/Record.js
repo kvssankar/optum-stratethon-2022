@@ -17,7 +17,10 @@ const RecordSchema = new mongoose.Schema({
     ref: "Patient",
     required: true,
   },
-  file: FileSchema,
+  description: {
+    type: String,
+  },
+  files: [FileSchema],
   created_at: {
     type: Date,
     default: Date.now,

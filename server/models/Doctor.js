@@ -16,6 +16,16 @@ const doctorSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  not_available: [
+    {
+      date: {
+        type: Date,
+      },
+      time: {
+        type: Number,
+      },
+    },
+  ],
   category: {
     type: String,
   },

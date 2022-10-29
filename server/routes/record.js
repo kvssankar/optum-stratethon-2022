@@ -24,7 +24,8 @@ router.get("/patient/:pid/", async (req, res) => {
 router.post("/create", async (req, res) => {
   const record = new Record({
     patient_id: req.body.patient_id,
-    file: req.body.file,
+    file: [req.body.file],
+    description: req.body.description,
   });
   try {
     const savedRecord = await record.save();

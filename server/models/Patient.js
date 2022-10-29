@@ -18,6 +18,15 @@ const patientSchema = new mongoose.Schema({
   otp: {
     type: String,
   },
+  chronic_diseases: [
+    {
+      disease: String,
+      session_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Session",
+      },
+    },
+  ],
   address: {
     type: String,
   },

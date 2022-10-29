@@ -1,4 +1,11 @@
-import { Avatar, Tag, TagLabel, TagRightIcon, Tooltip } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  Tag,
+  TagLabel,
+  TagRightIcon,
+  Tooltip,
+} from "@chakra-ui/react";
 import React from "react";
 import { MdCalendarToday } from "react-icons/md";
 
@@ -39,45 +46,44 @@ const ImmediateInfo = () => {
         </div>
       </div>
 
-      {/* 2 */}
-      <div className="flex flex-col w-full md:w-2/5 mb-6 border-2 border-blue-500 rounded-md">
-        <h1 className="font-semibold text-white bg-blue-500 text-lg border-b-2 border-blue-500 p-1 px-2">
-          Chronic Disease History
-        </h1>
-        <div className="flex flex-wrap gap-5 py-1 px-2 my-3">
-          <Tag>Sample Tag</Tag>
-          <Tag>Sample Tag</Tag>
-          <Tag>Sample Tag</Tag>
-          <Tag>Sample Tag</Tag>
-        </div>
-      </div>
-      {/* 3 */}
-      <div className="flex flex-col w-full md:w-2/5 mb-6 border-2 border-blue-500 rounded-md">
+      <div className="flex flex-col w-full md:w-4/5 mb-6 border-2 border-blue-500 rounded-md">
         <div className="flex justify-between w-full text-white bg-blue-500 py-1 px-2 ">
-          <h1 className="font-semibold text-lg">Session</h1>
+          <h1 className="font-semibold text-lg">Next Patient</h1>
           <Tooltip label="12th October, 2021" placement="top-start">
-            <Tag colorScheme={"teal"}>In Progress</Tag>
+            <Tag colorScheme={"teal"}>12:00 AM - 1:00 AM</Tag>
           </Tooltip>
         </div>
-        <div className="flex flex-col gap-5 py-3 px-2">
-          <Tag size="lg" colorScheme="blue" borderRadius="full">
-            <Avatar
-              src="https://bit.ly/sage-adebayo"
-              size="xs"
-              name="Dr Prasad"
-              ml={-1}
-              mr={2}
-            />
-            <TagLabel>Dr Prasad</TagLabel>
-          </Tag>
-          <Tag variant="outline" colorScheme="blue">
-            <TagLabel>Next Appointment on 2nd October, 2022</TagLabel>
-            <TagRightIcon as={MdCalendarToday} />
-          </Tag>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-          </p>
+        <div className="flex flex-col md:flex-row gap-5 py-3 px-2">
+          <div className="md:w-3/5">
+            <Tag size="lg" colorScheme="blue" borderRadius="full">
+              <Avatar
+                src="https://bit.ly/sage-adebayo"
+                size="xs"
+                name="Dr Prasad"
+                ml={-1}
+                mr={2}
+              />
+              <TagLabel>Micheal Murthy</TagLabel>
+            </Tag>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+            </p>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-y-2 md:w-2/5">
+            <Button colorScheme="blue" w="full">
+              Records
+            </Button>
+            <Button colorScheme="teal" w="full">
+              Lab Tests
+            </Button>
+            <Button colorScheme="red" w="full">
+              Add Record
+            </Button>
+            <Button colorScheme="green" w="full">
+              Add Lab Test
+            </Button>
+          </div>
         </div>
       </div>
     </div>
