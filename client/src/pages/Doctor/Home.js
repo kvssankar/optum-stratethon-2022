@@ -1,22 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PatientsTable from "../../components/Doctor/Profile/PatientsTable";
 import ImmediateInfo from "../../components/Doctor/Profile/ImmediateInfo";
 import Sidebar from "../../components/Doctor/Sidebar";
+import { useDoctorStore } from "../../store/doctorStore";
 
 const Home = () => {
+  const doctor = useDoctorStore((state) => state.doctor);
+  const logout = useDoctorStore((state) => state.logout);
+  const doctorSessions = useDoctorStore((state) => state.doctorSessions);
+  const getDoctorSessions = useDoctorStore((state) => state.getDoctorSessions);
+  function getDoctorSessionsFunction() {
+    getDoctorSessions(doctor._id);
+  }
+  useEffect(() => {
+    getDoctorSessionsFunction(doctor._id);
+    console.log(doctorSessions);
+  }, []);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    logout();
+  };
   return (
-    <div className="flex flex-col md:flex-row mx-5 ">
+    <div className='flex flex-col md:flex-row mx-5 '>
       <Sidebar />
-      <div className="flex flex-col pt-5 pb-5 pr-0 md:pr-5 w-full">
-        <div className="">
-          <h1 className="font-bold text-blue-500 text-lg">Welcome Sankar</h1>
-          <p className="text-sm">How are you doing ?</p>
+      <div className='flex flex-col pt-5 pb-5 pr-0 md:pr-5 w-full'>
+        <div className='flex justify-between'>
+          <h1 className='font-bold text-blue-500 text-lg'>Welcome Sankar</h1>
+          <form onSubmit={(e) => onSubmit(e)}>
+            <button type='submit' className='font-bold text-blue-500 text-lg'>
+              Logout
+            </button>
+          </form>
         </div>
+        <p className='text-sm'>How are you doing ?</p>
         <ImmediateInfo />
-        <h1 className="text-xl text-blue-500 font-semibold mb-3">
+        <h1 className='text-xl text-blue-500 font-semibold mb-3'>
           Today's Appointments
         </h1>
-        <div className="">
+        <div className=''>
           <PatientsTable />
         </div>
       </div>

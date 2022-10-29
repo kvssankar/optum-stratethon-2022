@@ -1,13 +1,15 @@
 import { Avatar, Tag, TagLabel, TagRightIcon, Tooltip } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { MdCalendarToday } from "react-icons/md";
 import { usePatientStore } from "../../../store/patientStore";
 
 const ImmediateInfo = () => {
   const patient = usePatientStore((state) => state.patient);
-  const chronic_diseases_obj = patient.data.chronic_diseases.keys();
-  const chronic_diseases_array = Object.keys(chronic_diseases_obj);
-  console.log(chronic_diseases_array);
+  const chronicArray = [];
+  if (patient && patient.chronic_diseases) {
+    const chronicArray = Object.values(patient.chronic_diseases);
+  }
+
   return (
     <div className='flex flex-col items-center md:items-stretch md:flex-row  gap-x-5 w-full mt-5 mb-5'>
       {/* 1 */}
@@ -17,11 +19,15 @@ const ImmediateInfo = () => {
           alt=''
           className='object-cover h-32 w-32 rounded-md bg-white'
         />
-        {patient && <h1 className='font-semibold'>{patient.data.name}</h1>}
         {patient && (
-          <p className='text-sm font-semibold'>{patient.data.gender}</p>
+          <h1 className='font-semibold'>{patient && patient.name}</h1>
         )}
-        {patient && <p className='text-sm font-semibold'>{patient.data.age}</p>}
+        {patient && (
+          <p className='text-sm font-semibold'>{patient && patient.gender}</p>
+        )}
+        {patient && (
+          <p className='text-sm font-semibold'>{patient && patient.age}</p>
+        )}
       </div>
 
       {/* FOR MOBILE */}
@@ -36,20 +42,20 @@ const ImmediateInfo = () => {
           {patient && (
             <h1 className='font-semibold'>
               <span className='hidden sm:inline'>Name : </span>
-              {patient.data.name}
+              {patient && patient.name}
             </h1>
           )}
           {patient && (
             <p className='text-sm'>
               <span className='hidden sm:inline'>Age : </span>
-              {patient.data.age}
+              {patient && patient.age}
             </p>
           )}
           {patient && (
             <p className='text-sm'>
               {" "}
               <span className='hidden sm:inline'>Gender : </span>
-              {patient.data.gender}
+              {patient && patient.gender}
             </p>
           )}
         </div>
@@ -60,10 +66,9 @@ const ImmediateInfo = () => {
           Chronic Disease History
         </h1>
         <div className='flex flex-wrap gap-5 py-1 px-2 my-3'>
-          {chronic_diseases_array.map((disease, key) => (
-            <Tag>{disease}</Tag>
+          {chronicArray.map((obj) => (
+            <Tag>{obj.disease}</Tag>
           ))}
-          <Tag></Tag>
           <Tag>Sample Tag</Tag>
           <Tag>Sample Tag</Tag>
           <Tag>Sample Tag</Tag>

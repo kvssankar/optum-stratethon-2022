@@ -17,14 +17,17 @@ const doctorSchema = new mongoose.Schema({
     default: Date.now,
   },
   not_available: [
-    {
-      date: {
-        type: Date,
+    new mongoose.Schema(
+      {
+        date: {
+          type: Date,
+        },
+        time: {
+          type: Number,
+        },
       },
-      time: {
-        type: Number,
-      },
-    },
+      { _id: false }
+    ),
   ],
   category: {
     type: String,

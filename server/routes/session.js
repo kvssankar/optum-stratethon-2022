@@ -15,6 +15,7 @@ router.get("/:sid", verify, async (req, res) => {
 
 router.get("/patient/:pid/", verify, async (req, res) => {
   try {
+    console.log(req.params.pid);
     const sessions = await Session.find({
       patient_id: req.params.pid,
     });
@@ -24,23 +25,62 @@ router.get("/patient/:pid/", verify, async (req, res) => {
   }
 });
 
-router.get("/doctor/:did/", verify, async (req, res) => {
+router.post("/patient/getSessions/", verify, async (req, res) => {
   try {
-    const sessions = await Session.find({ doctor_id: req.params.did });
+    console.log(req.body.patient_id);
+    const sessions = await Session.find({
+      patient_id: req.body.patient_id,
+    });
+    console.log(sessions);
     res.json({ data: sessions });
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }
 });
 
+router.get("/doctor/:did/", verify, async (req, res) => {
+  try {
+    const sessions = await Session.find({ doctor_id: req.params.did });
+    let date_ob = new Date();
+    res.json({ data: sessions, date: date_ob });
+  } catch (err) {
+    res.status(500).json({ status: 1, err });
+  }
+});
+
+router.post("/doctor/getSessions", async (req, res) => {
+  console.log("HI", req.body.doctor_id);
+  try {
+    const sessions = await Session.find({ doctor_id: req.body.doctor_id });
+    let date_ob = new Date();
+    res.json({ data: sessions, date: date_ob });
+  } catch (err) {
+    res.status(500).json({ status: 1, err });
+  }
+});
+
 router.post("/create", verify, async (req, res) => {
+  console.log(req.body.time);
   const doctors = await Doctor.find({
     not_available: {
-      $nin: [{ date: req.body.date, time: req.body.time }],
+      $nin: [
+        {
+          date: req.body.date,
+          time: req.body.time,
+        },
+      ],
     },
+    started_at: req.body.date,
+    time: Number(req.body.time),
     category: req.body.category,
   });
-  const doctor = doctors[Math.floor(Math.random() * doctors.length)];
+  console.log(doctors);
+  if (doctors.length === 0) {
+    return res.status(500).json({ status: 1, err: "No doctors available" });
+  }
+  let doctor = doctors[Math.floor(Math.random() * doctors.length)];
+  doctor.not_available.push({ date: req.body.date, time: req.body.time });
+  await doctor.save();
   const session = new Session({
     patient_id: req.user._id,
     disease: req.body.disease,
