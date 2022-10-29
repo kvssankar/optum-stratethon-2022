@@ -18,14 +18,12 @@ var upload = multer({
     bucket: "healthcare-doofin",
     acl: "public-read",
     key: function (req, file, cb) {
-      console.log(file);
       cb(null, file.originalname); //use Date.now() for unique file keys
     },
   }),
 });
 
 router.post("/", upload.single("file"), async (req, res) => {
-  console.log(req.file);
   res.json({
     filename: req.file.originalname,
     filelocation: req.file.location,

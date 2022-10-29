@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 var cors = require("cors");
 require("dotenv").config();
+const path = require("path");
 
 app.use(express.json());
 
@@ -30,6 +31,12 @@ app.use("/api/upload", require("./routes/upload"));
 const connect = mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+
+const root = path.resolve(__dirname, "build");
+app.use(express.static(root));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "client", "build", "index.html"));
 });
 
 app.listen(process.env.PORT || 8000, () => {

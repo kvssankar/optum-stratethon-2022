@@ -2,11 +2,15 @@ const router = require("express").Router();
 const Session = require("../models/Session");
 const Doctor = require("../models/Doctor");
 const Patient = require("../models/Patient");
+const LabTest = require("../models/labTest");
 const verify = require("../verify");
+const axios = require("axios").create();
 
-router.get("/:sid", verify, async (req, res) => {
+router.get("/:sid", async (req, res) => {
   try {
-    const session = await Session.find({ _id: req.params.sid });
+    const session = await Session.findById(req.params.sid)
+      .populate("doctor_id")
+      .populate("patient_id");
     res.json({ data: session });
   } catch (err) {
     res.status(500).json({ status: 1, err });
@@ -15,17 +19,19 @@ router.get("/:sid", verify, async (req, res) => {
 
 router.get("/patient/:pid/", verify, async (req, res) => {
   try {
-    console.log(req.params.pid);
     const sessions = await Session.find({
       patient_id: req.params.pid,
-    });
+      ended_at: null,
+    })
+      .sort({ started_at: 1 })
+      .populate("doctor_id")
+      .populate("patient_id");
     res.json({ data: sessions });
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }
 });
 
-<<<<<<< HEAD
 router.get("/doctor/:did/", async (req, res) => {
   try {
     const sessions = await Session.find({ doctor_id: req.params.did })
@@ -34,24 +40,13 @@ router.get("/doctor/:did/", async (req, res) => {
       .populate("doctor_id");
     let date_ob = new Date();
     res.json({ data: sessions, date: date_ob });
-=======
-router.post("/patient/getSessions/", verify, async (req, res) => {
-  try {
-    console.log(req.body.patient_id);
-    const sessions = await Session.find({
-      patient_id: req.body.patient_id,
-    });
-    console.log(sessions);
-    res.json({ data: sessions });
->>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }
 });
 
-router.get("/doctor/:did/", verify, async (req, res) => {
+router.post("/doctor/getSessions", async (req, res) => {
   try {
-<<<<<<< HEAD
     const sessions = await Session.find({
       doctor_id: req.body.doctor_id,
     })
@@ -59,10 +54,6 @@ router.get("/doctor/:did/", verify, async (req, res) => {
       .populate("doctor_id");
     let date_ob = new Date();
     res.json({ data: sessions, date: date_ob });
-=======
-    const sessions = await Session.find({ doctor_id: req.params.did });
-    res.json({ data: sessions });
->>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }
@@ -78,26 +69,30 @@ router.post("/create", verify, async (req, res) => {
         },
       ],
     },
+
     category: req.body.category,
   });
-  console.log(doctors);
   if (doctors.length === 0) {
     return res.status(500).json({ status: 1, mssg: "No doctors available" });
   }
   let doctor = doctors[Math.floor(Math.random() * doctors.length)];
   doctor.not_available.push({ date: req.body.date, time: req.body.time });
   await doctor.save();
-  console.log(req.user._id);
   const session = new Session({
     patient_id: req.user._id,
     disease: req.body.disease,
     description: req.body.description,
     doctor_id: doctor._id,
+    started_at: {
+      date: req.body.date,
+      time: req.body.time,
+    },
   });
   try {
     const savedSession = await session.save();
     res.json({ data: savedSession });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ status: 1, err });
   }
 });
@@ -114,7 +109,6 @@ router.post("/end", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
 //lab test
 
 router.post("/labtest/perform", async (req, res) => {
@@ -162,6 +156,4 @@ router.post("/labtests/get", async (req, res) => {
   }
 });
 
-=======
->>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
 module.exports = router;

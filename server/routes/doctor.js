@@ -49,7 +49,6 @@ router.post("/login", async (req, res) => {
     }
   }
   if (req.body.otp !== doctor.otp) {
-    //await Doctor.findByIdAndDelete(doctor._id);
     return res.status(500).json({ status: 1, mssg: "Incorrect OTP" });
   }
   doctor.address = req.body.address;
@@ -68,7 +67,6 @@ router.post("changenotavailable", verify, async (req, res) => {
 });
 
 router.get("/patient/:pid", verify, async (req, res) => {
-  console.log(req.params.pid);
   const patient = await Patient.findById(req.params.pid);
   res.json({ data: patient });
 });

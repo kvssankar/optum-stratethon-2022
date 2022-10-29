@@ -1,17 +1,7 @@
-import {
-  Avatar,
-  Button,
-  Tag,
-  TagLabel,
-  TagRightIcon,
-  Link,
-  Tooltip,
-} from "@chakra-ui/react";
+import { Avatar, Button, Tag, TagLabel, Tooltip } from "@chakra-ui/react";
 import { useDoctorStore } from "../../../store/doctorStore";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { MdCalendarToday } from "react-icons/md";
-import ComponentLoader from "../../Loader/ComponentLoader";
 import { times } from "../../../constants/globalconstants";
 
 const ImmediateInfo = () => {
@@ -23,15 +13,9 @@ const ImmediateInfo = () => {
       {/* 1 */}
       <div className="hidden md:flex flex-row md:flex-col w-full md:w-1/5 mb-6 bg-blue-500 rounded-md justify-center items-center text-white pt-5 pb-5">
         <img
-<<<<<<< HEAD
           src="https://www.woodlandshospital.in/images/doctor-img/ravi-kant-saraogi.jpg"
           alt=""
           className="object-cover h-32 w-32 rounded-md bg-white"
-=======
-          src='https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4065730.png'
-          alt=''
-          className='object-cover h-32 w-32 rounded-md bg-white'
->>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
         />
         <h1 className="font-semibold">{doctor.name}</h1>
         <p className="text-sm">{doctor.age}</p>
@@ -76,7 +60,6 @@ const ImmediateInfo = () => {
             )}
           </Tooltip>
         </div>
-<<<<<<< HEAD
         {doctorSessions[0] ? (
           <div className="flex flex-col md:flex-row gap-5 py-3 px-2">
             <div className="md:w-3/5">
@@ -110,24 +93,6 @@ const ImmediateInfo = () => {
                 Add Lab Test
               </Button>
             </div>
-=======
-        <div className='flex flex-col md:flex-row gap-5 py-3 px-2'>
-          <div className='md:w-3/5'>
-            <Tag size='lg' colorScheme='blue' borderRadius='full'>
-              <Avatar
-                src='https://bit.ly/sage-adebayo'
-                size='xs'
-                name='Dr Prasad'
-                ml={-1}
-                mr={2}
-              />
-              <TagLabel>Micheal Murthy</TagLabel>
-            </Tag>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            </p>
->>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
           </div>
         ) : (
           <h1 className="m-3">No sessions</h1>

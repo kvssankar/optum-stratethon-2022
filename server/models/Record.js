@@ -17,7 +17,6 @@ const RecordSchema = new mongoose.Schema({
     ref: "Patient",
     required: true,
   },
-<<<<<<< HEAD
   doctor_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "doctor",
@@ -28,8 +27,6 @@ const RecordSchema = new mongoose.Schema({
     ref: "Session",
     required: true,
   },
-=======
->>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
   description: {
     type: String,
   },
@@ -40,6 +37,7 @@ const RecordSchema = new mongoose.Schema({
   },
 });
 
+const File = mongoose.model("File", FileSchema);
 const Record = mongoose.model("Record", RecordSchema);
 
-module.exports = Record;
+module.exports = { Record, File };

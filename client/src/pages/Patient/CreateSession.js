@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import Sidebar from "../../components/Patient/Sidebar";
 import {
-  Flex,
   Box,
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
-  Link,
   Button,
-  Heading,
-  Text,
   useColorModeValue,
   Textarea,
   Select,

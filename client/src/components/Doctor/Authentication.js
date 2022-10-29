@@ -9,15 +9,10 @@ import {
   Link,
   Button,
   Heading,
-  Text,
   useColorModeValue,
   Select,
 } from "@chakra-ui/react";
-import {
-  diseases,
-  doctor_categories,
-  times,
-} from "../../constants/globalconstants";
+import { doctor_categories } from "../../constants/globalconstants";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDoctorStore } from "../../store/doctorStore";
@@ -104,12 +99,9 @@ const SimpleCard = () => {
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Sign in to your account</Heading>
-<<<<<<< HEAD
           <Heading color="gray" fontSize={"1xl"}>
             (As a DOCTOR)
           </Heading>
-=======
->>>>>>> b39513b5c25f1bdc595cc4f2420e5da2fd5bce15
         </Stack>
         <Box
           rounded={"lg"}
@@ -136,7 +128,7 @@ const SimpleCard = () => {
               </FormControl>
 
               {/* FORM PART 1 */}
-              {progress == 1 && (
+              {progress === 1 && (
                 <FormControl id="otp">
                   <FormLabel>OTP</FormLabel>
                   <Input
@@ -150,7 +142,7 @@ const SimpleCard = () => {
               )}
 
               {/* FORM PART 2 */}
-              {progress == 2 && (
+              {progress === 2 && (
                 <FormControl id="name">
                   <FormLabel>Name</FormLabel>
                   <Input
@@ -162,7 +154,7 @@ const SimpleCard = () => {
                   />
                 </FormControl>
               )}
-              {progress == 2 && (
+              {progress === 2 && (
                 <FormControl id="age">
                   <FormLabel>Age</FormLabel>
                   <Input
@@ -174,7 +166,7 @@ const SimpleCard = () => {
                   />
                 </FormControl>
               )}
-              {progress == 2 && (
+              {progress === 2 && (
                 <FormControl id="address">
                   <FormLabel>Address</FormLabel>
                   <Input
@@ -186,7 +178,7 @@ const SimpleCard = () => {
                   />
                 </FormControl>
               )}
-              {progress == 2 && (
+              {progress === 2 && (
                 <FormControl id="gender">
                   <FormLabel>Gender</FormLabel>
                   <Input
@@ -198,7 +190,7 @@ const SimpleCard = () => {
                   />
                 </FormControl>
               )}
-              {progress == 2 && (
+              {progress === 2 && (
                 <FormControl>
                   <FormLabel>Category</FormLabel>
                   <Select
@@ -234,9 +226,9 @@ const SimpleCard = () => {
                   type="submit"
                   onClick={action}
                 >
-                  {progress == 0 && "SEND OTP"}
-                  {progress == 1 && "PROCEED"}
-                  {progress == 2 && "CONFIRM DETAILS"}
+                  {progress === 0 && "SEND OTP"}
+                  {progress === 1 && "PROCEED"}
+                  {progress === 2 && "CONFIRM DETAILS"}
                 </Button>
               </Stack>
             </Stack>
