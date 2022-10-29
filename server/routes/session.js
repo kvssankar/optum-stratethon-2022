@@ -8,12 +8,9 @@ const axios = require("axios").create();
 
 router.get("/:sid", async (req, res) => {
   try {
-    const session = await Session.find({ _id: req.params.sid })
+    const session = await Session.findById(req.params.sid)
       .populate("doctor_id")
       .populate("patient_id");
-    console.log("**********************");
-    console.log(session, "here are sessions");
-    console.log("**********************");
     res.json({ data: session });
   } catch (err) {
     res.status(500).json({ status: 1, err });
@@ -22,30 +19,33 @@ router.get("/:sid", async (req, res) => {
 
 router.get("/patient/:pid/", verify, async (req, res) => {
   try {
-    console.log(req.params.pid);
     const sessions = await Session.find({
       patient_id: req.params.pid,
-    });
+      ended_at: null,
+    })
+      .sort({ started_at: 1 })
+      .populate("doctor_id")
+      .populate("patient_id");
     res.json({ data: sessions });
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }
 });
 
-router.post("/patient/getSessions/", verify, async (req, res) => {
-  try {
-    console.log(req.body.patient_id);
-    const sessions = await Session.find({
-      patient_id: req.body.patient_id,
-    })
-      .populate("doctor_id")
-      .populate("patient_id");
-    console.log(sessions);
-    res.json({ data: sessions });
-  } catch (err) {
-    res.status(500).json({ status: 1, err });
-  }
-});
+// router.post("/patient/getSessions/", verify, async (req, res) => {
+//   try {
+//     console.log(req.body.patient_id);
+//     const sessions = await Session.find({
+//       patient_id: req.body.patient_id,
+//     })
+//       .populate("doctor_id")
+//       .populate("patient_id");
+//     console.log(sessions);
+//     res.json({ data: sessions });
+//   } catch (err) {
+//     res.status(500).json({ status: 1, err });
+//   }
+// });
 
 router.get("/doctor/:did/", verify, async (req, res) => {
   try {
@@ -73,7 +73,6 @@ router.post("/doctor/getSessions", async (req, res) => {
 });
 
 router.post("/create", verify, async (req, res) => {
-  console.log(req.body.time);
   const doctors = await Doctor.find({
     not_available: {
       $nin: [
@@ -86,7 +85,6 @@ router.post("/create", verify, async (req, res) => {
 
     category: req.body.category,
   });
-  console.log(doctors);
   if (doctors.length === 0) {
     return res.status(500).json({ status: 1, err: "No doctors available" });
   }
@@ -98,13 +96,17 @@ router.post("/create", verify, async (req, res) => {
     disease: req.body.disease,
     description: req.body.description,
     doctor_id: doctor._id,
-    started_at: req.body.date,
-    time: Number(req.body.time),
+    started_at: {
+      date: req.body.date,
+      time: req.body.time,
+    },
   });
   try {
     const savedSession = await session.save();
+    console.log(savedSession);
     res.json({ data: savedSession });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ status: 1, err });
   }
 });

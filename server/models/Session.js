@@ -33,10 +33,8 @@ const sessionSchema = new mongoose.Schema({
     default: Date.now,
   },
   started_at: {
-    type: Date,
-  },
-  time: {
-    type: Number,
+    date: Date,
+    time: Number,
   },
   ended_at: {
     type: Date,

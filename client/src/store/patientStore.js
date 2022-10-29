@@ -10,7 +10,7 @@ const useStore = create(
       patient: null,
       sessions: [],
       labTests: [],
-      particularSession: [],
+      particularSession: null,
       login: (email, otp) => {
         axios.post("/api/patient/login", { email, otp }).then((res) => {
           localStorage.setItem("auth-token", res.data.token);
@@ -62,32 +62,28 @@ const useStore = create(
             "auth-token": localStorage.getItem("auth-token"),
           },
         };
-        const x = "/api/session/" + session_id.session_id;
+        const x = "/api/session/" + session_id;
         axios.get(x, config).then((res) => {
-          // console.log("here is data received", res.data.data[0]);
+          console.log("patientstore check", res.data.data);
           set((state) => ({
-            particularSession: [res.data.data[0]],
+            particularSession: res.data.data,
           }));
         });
       },
       logout: () => {
-        let config = {
-          headers: {
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        };
         set({ patient: null });
         localStorage.setItem("auth-token", null);
       },
       getPatientSessions: (patient_id) => {
-        const String = "/api/session/patient/getSessions";
+        const url = "/api/session/patient/" + patient_id;
         let config = {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),
           },
         };
-        axios.post(String, { patient_id }, config).then((res) => {
-          set((state) => ({ sessions: [res.data.data] }));
+        axios.get(url, config).then((res) => {
+          // console.log("here is x", res.data.data);
+          set((state) => ({ sessions: res.data.data }));
         });
       },
       performLabTest: (patient_id, name, fileUrl) => {

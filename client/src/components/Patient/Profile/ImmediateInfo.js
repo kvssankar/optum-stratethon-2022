@@ -2,10 +2,13 @@ import { Avatar, Tag, TagLabel, TagRightIcon, Tooltip } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { MdCalendarToday } from "react-icons/md";
 import { usePatientStore } from "../../../store/patientStore";
+import ComponentLoader from "../../Loader/ComponentLoader";
+// import PageLoader from "../../Loader/PageLoader";
+import moment from "moment";
 
 const ImmediateInfo = () => {
   const patient = usePatientStore((state) => state.patient);
-
+  const patientSessions = usePatientStore((state) => state.sessions);
   return (
     <div className='flex flex-col items-center md:items-stretch md:flex-row  gap-x-5 w-full mt-5 mb-5'>
       {/* 1 */}
@@ -15,15 +18,9 @@ const ImmediateInfo = () => {
           alt=''
           className='object-cover h-32 w-32 rounded-md bg-white'
         />
-        {patient && (
-          <h1 className='font-semibold'>{patient && patient.name}</h1>
-        )}
-        {patient && (
-          <p className='text-sm font-semibold'>{patient && patient.gender}</p>
-        )}
-        {patient && (
-          <p className='text-sm font-semibold'>{patient && patient.age}</p>
-        )}
+        <h1 className='font-semibold'>{patient.name}</h1>
+        <p className='text-sm font-semibold'>{patient.gender}</p>
+        <p className='text-sm font-semibold'>{patient.age}</p>
       </div>
 
       {/* FOR MOBILE */}
@@ -34,26 +31,18 @@ const ImmediateInfo = () => {
           className='object-cover h-32 w-32 rounded-md bg-white'
         />
         <div className='flex flex-col items-start'>
-          {" "}
-          {patient && (
-            <h1 className='font-semibold'>
-              <span className='hidden sm:inline'>Name : </span>
-              {patient && patient.name}
-            </h1>
-          )}
-          {patient && (
-            <p className='text-sm'>
-              <span className='hidden sm:inline'>Age : </span>
-              {patient && patient.age}
-            </p>
-          )}
-          {patient && (
-            <p className='text-sm'>
-              {" "}
-              <span className='hidden sm:inline'>Gender : </span>
-              {patient && patient.gender}
-            </p>
-          )}
+          <h1 className='font-semibold'>
+            <span className='hidden sm:inline'>Name : </span>
+            {patient.name}
+          </h1>
+          <p className='text-sm'>
+            <span className='hidden sm:inline'>Age : </span>
+            {patient.age}
+          </p>
+          <p className='text-sm'>
+            <span className='hidden sm:inline'>Gender : </span>
+            {patient.gender}
+          </p>
         </div>
       </div>
       {/* 2 */}
@@ -76,24 +65,32 @@ const ImmediateInfo = () => {
           </Tooltip>
         </div>
         <div className='flex flex-col gap-5 py-3 px-2'>
-          <Tag size='lg' colorScheme='blue' borderRadius='full'>
-            <Avatar
-              src='https://bit.ly/sage-adebayo'
-              size='xs'
-              name='Dr Prasad'
-              ml={-1}
-              mr={2}
-            />
-            <TagLabel>Dr Prasad</TagLabel>
-          </Tag>
-          <Tag variant='outline' colorScheme='blue'>
-            <TagLabel>Next Appointment on 17nd October, 2022</TagLabel>
-            <TagRightIcon as={MdCalendarToday} />
-          </Tag>
-          <p>
-            Severe eye pain, maybe due to the ongoing diabetes and increase in
-            blood sugar levels. White film formation over eyelid/cornea
-          </p>
+          {patientSessions ? (
+            <>
+              <Tag size='lg' colorScheme='blue' borderRadius='full'>
+                <Avatar
+                  src='https://bit.ly/sage-adebayo'
+                  size='xs'
+                  name={patientSessions[0].doctor_id.name}
+                  ml={-1}
+                  mr={2}
+                />
+                <TagLabel>{patientSessions[0].doctor_id.name}</TagLabel>
+              </Tag>
+              <Tag variant='outline' colorScheme='blue'>
+                <TagLabel>
+                  Next Appointment on{" "}
+                  {moment(patientSessions[0].started_at.date).format(
+                    "MMMM Do YYYY, h:mm:ss a"
+                  )}
+                </TagLabel>
+                <TagRightIcon as={MdCalendarToday} />
+              </Tag>
+              <p>{patientSessions[0].description}</p>
+            </>
+          ) : (
+            <h1>No Session</h1>
+          )}
         </div>
       </div>
     </div>

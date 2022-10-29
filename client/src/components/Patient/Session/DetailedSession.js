@@ -7,6 +7,7 @@ import {
   Tag,
   Tooltip,
 } from "@chakra-ui/react";
+import PageLoader from "../../../components/Loader/PageLoader";
 
 import React, { useEffect, useState } from "react";
 import { usePatientStore } from "../../../store/patientStore";
@@ -18,11 +19,11 @@ const ImmediateInfo = (session_id) => {
   const particularSession = usePatientStore((state) => state.particularSession);
 
   useEffect(() => {
-    getParticularSession(session_id);
-    console.log(particularSession[0]);
+    getParticularSession(session_id.session_id);
+    console.log("testing here", particularSession);
   }, []);
 
-  return (
+  return particularSession ? (
     <div className='flex flex-col items-center md:items-stretch md:flex-row  gap-x-5 w-full mt-5 mb-5'>
       <div className='flex flex-col w-full md:w-full mb-6 border-2 border-blue-500 rounded-md'>
         <div className='flex flex-col md:flex-row items-center justify-center md:justify-between w-full text-white bg-blue-500 py-1 px-2 '>
@@ -50,55 +51,45 @@ const ImmediateInfo = (session_id) => {
             <TabPanels>
               <TabPanel>
                 <div className='flex flex-col'>
-                  {particularSession[0].doctor_id && (
+                  <div>
+                    <p>
+                      {" "}
+                      <span style={{ fontWeight: "bold" }}>
+                        Doctor Name -
+                      </span>{" "}
+                      {particularSession.doctor_id.name}
+                    </p>
+                    <p>
+                      <span style={{ fontWeight: "bold" }}>
+                        Doctor Specialization -
+                      </span>
+                      {particularSession.doctor_id.category}
+                    </p>
+                    <p>
+                      <span style={{ fontWeight: "bold" }}>Doctor Email -</span>
+                      {particularSession.doctor_id.email}
+                    </p>
+                    <hr></hr>
+                    <br></br>
+                    <hr></hr>
+                  </div>
+                  <div>
+                    <p>
+                      <span style={{ fontWeight: "bold" }}>Description</span>{" "}
+                      {particularSession.description}
+                    </p>
+                    <p>
+                      <span style={{ fontWeight: "bold" }}>Disease -</span>{" "}
+                      {particularSession.disease}
+                    </p>
                     <div>
+                      {" "}
                       <p>
-                        {" "}
-                        <span style={{ fontWeight: "bold" }}>
-                          Doctor Name -
-                        </span>{" "}
-                        {particularSession[0].doctor_id.name}
+                        <span style={{ fontWeight: "bold" }}>Start Date</span>{" "}
+                        {particularSession.started_at.date.substring(0, 10)}
                       </p>
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>
-                          Doctor Specialization -
-                        </span>
-                        {particularSession[0].doctor_id.category}
-                      </p>
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>
-                          Doctor Email -
-                        </span>
-                        {particularSession[0].doctor_id.email}
-                      </p>
-                      <hr></hr>
-                      <br></br>
-                      <hr></hr>
                     </div>
-                  )}
-                  {particularSession[0] && (
-                    <div>
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>Description</span>{" "}
-                        {particularSession[0].description}
-                      </p>
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>Disease -</span>{" "}
-                        {particularSession[0].disease}
-                      </p>
-                      {particularSession[0].started_at && (
-                        <div>
-                          {" "}
-                          <p>
-                            <span style={{ fontWeight: "bold" }}>
-                              Start Date
-                            </span>{" "}
-                            {particularSession[0].started_at.substring(0, 10)}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                  </div>
                 </div>
               </TabPanel>
               <TabPanel>
@@ -153,6 +144,8 @@ const ImmediateInfo = (session_id) => {
         </div>
       </div>
     </div>
+  ) : (
+    <PageLoader />
   );
 };
 
