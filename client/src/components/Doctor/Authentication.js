@@ -60,7 +60,7 @@ const SimpleCard = () => {
       if (userExists) {
         try {
           await login(email, otp);
-          navigate("/Doctor");
+          navigate("/doctor");
         } catch (err) {
           console.log(err);
         }
@@ -83,7 +83,7 @@ const SimpleCard = () => {
           return;
         }
         await register(name, email, address, age, gender, otp, category);
-        navigate("/Doctor");
+        navigate("/doctor");
       } catch (err) {
         console.log(err);
       }
@@ -200,7 +200,9 @@ const SimpleCard = () => {
                     }}
                   >
                     {doctor_categories.map((category) => (
-                      <option value={category}>{category}</option>
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
                     ))}
                     <option default hidden selected value="">
                       Please Select Category

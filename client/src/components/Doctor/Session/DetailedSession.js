@@ -80,11 +80,11 @@ const ImmediateInfo = (session_id) => {
                 <div className="flex flex-col md:flex-row justify-center items-center">
                   <div className="pdf mr-10">
                     <img src="/pdficon.png" width="100px"></img>
-                    <sm style={{ fontSize: "10px" }}>Prescription 20/9/2022</sm>
+                    <p style={{ fontSize: "10px" }}>Prescription 20/9/2022</p>
                   </div>
                   <div className="pdf mr-10">
                     <img src="/pdficon.png" width="100px"></img>
-                    <sm style={{ fontSize: "10px" }}>Prescription 10/9/2022</sm>
+                    <p style={{ fontSize: "10px" }}>Prescription 10/9/2022</p>
                   </div>
                   {/* <div>
                     <Document
@@ -103,15 +103,15 @@ const ImmediateInfo = (session_id) => {
                 <div className="flex flex-col md:flex-row justify-center items-center">
                   <div className="pdf mr-10 ">
                     <img src="/pdficon.png" width="100px"></img>
-                    <sm style={{ fontSize: "10px" }}>Report MRI</sm>
+                    <p style={{ fontSize: "10px" }}>Report MRI</p>
                   </div>
                   <div className="pdf mr-10">
                     <img src="/pdficon.png" width="100px"></img>
-                    <sm style={{ fontSize: "10px" }}>Report X-Ray Chest</sm>
+                    <p style={{ fontSize: "10px" }}>Report X-Ray Chest</p>
                   </div>
                   <div className="pdf mr-10">
                     <img src="/pdficon.png" width="100px"></img>
-                    <sm style={{ fontSize: "10px" }}>Report X-Ray Hand</sm>
+                    <p style={{ fontSize: "10px" }}>Report X-Ray Hand</p>
                   </div>
                 </div>
               </TabPanel>

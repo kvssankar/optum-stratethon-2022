@@ -8,9 +8,7 @@ const Session = () => {
     <div className="flex flex-col md:flex-row mx-5 ">
       <Sidebar />
       <div className="flex flex-col pt-5 pb-5 pr-0 md:pr-5 w-full">
-        {/* <ProgressBar /> */}
         <DetailedSession session_id={session_id} />
-        <div className=""></div>
       </div>
     </div>
   );

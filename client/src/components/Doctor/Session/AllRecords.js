@@ -9,7 +9,6 @@ import {
   Button,
   Tag,
   Modal,
-  ModalOverlay,
   ModalContent,
   ModalCloseButton,
   ModalHeader,
@@ -68,33 +67,33 @@ const AllRecords = (session_id) => {
 
   return particularRecords ? (
     <Accordion defaultIndex={[0]} allowMultiple>
-      {particularRecords.map((record) => (
-        <AccordionItem border="1px">
+      {particularRecords.map((record, idx) => (
+        <AccordionItem
+          border={"none"}
+          boxShadow="base"
+          borderRadius={5}
+          mb="3"
+          key={idx}
+        >
           <h2>
             <AccordionButton>
               <Box flex="1" textAlign="left">
-                Date : {moment(record.created_at).calendar()}
+                Record on{" "}
+                {moment(record.created_at).format("DD-MM-YYYY hh:mm A")}
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
-          <AccordionPanel
-            className="rounded-sm"
-            bgGradient="linear(to-b, rgb(186, 197, 226,0.50), pink.50)"
-            pb={4}
-          >
+          <AccordionPanel className="rounded-sm" bg={"gray.100"} pb={4}>
             <div className="flex flex-col ">
-              <div className="pb-5">
-                <p>Description : {record.description}</p>
+              <div className="pb-3">
+                <p>{record.description}</p>
               </div>
-              <hr></hr>
-              <div className="pt-2">
-                <div className="  py-1 rounded-sm  flex items-center justify-between mb-3">
+              <div>
+                <div className="py-1 rounded-sm  flex items-center justify-between">
                   <h1 className="text-md text-blue-500 font-semibold">Files</h1>
-                  <hr></hr>
                   <form className="form">
                     <Modal isOpen={isOpen} onClose={onClose}>
-                      <ModalOverlay />
                       <ModalContent>
                         <ModalHeader>Add file</ModalHeader>
                         <ModalCloseButton />
@@ -115,22 +114,18 @@ const AllRecords = (session_id) => {
                                 onChange={(e) => setFile(e.target.files[0])}
                               />
                             </FormControl>
+                            <Button
+                              bg={"blue.400"}
+                              color={"white"}
+                              _hover={{
+                                bg: "blue.500",
+                              }}
+                              type="submit"
+                              onClick={(e) => onClick(e, record._id)}
+                            >
+                              ADD {loading && <ComponentLoader pl={2} />}
+                            </Button>
                           </Stack>
-                          <Button
-                            bg={"blue.400"}
-                            color={"white"}
-                            _hover={{
-                              bg: "blue.500",
-                            }}
-                            type="submit"
-                            onClick={(e) => onClick(e, record._id)}
-                          >
-                            ADD {loading && <ComponentLoader pl={2} />}
-                          </Button>
-
-                          {/* <Button colorScheme='blue' ml={3} onClick={onClose}>
-                              Close
-                            </Button> */}
                         </ModalBody>
                       </ModalContent>
                     </Modal>
@@ -148,13 +143,12 @@ const AllRecords = (session_id) => {
                   </Button>
                 </div>
               </div>
-              <hr></hr>
-              <div className="pt-2">
-                {record.files.map((file) => (
-                  <Tag border="1px" className=" p-2 m-4" colorScheme="blue">
+              <div>
+                {record.files.map((file, idx) => (
+                  <Tag key={idx} className="px-2 py-1 m-4" colorScheme="blue">
                     <Link href={file.url}>
-                      <div className="  w-full py-1 px-2  rounded-sm  flex items-center justify-start ">
-                        <p className="pr-3 uppercase">{file.name}....</p>{" "}
+                      <div className="w-full py-1 px-2 rounded-sm flex items-center justify-start ">
+                        <p className="pr-3 text-sm">{file.name}</p>
                         <AiOutlineDownload size={20} />
                       </div>
                     </Link>

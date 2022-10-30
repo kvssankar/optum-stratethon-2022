@@ -1,32 +1,20 @@
 import React, { useState } from "react";
 import Sidebar from "../../components/Patient/Sidebar";
 import {
-  Flex,
   Box,
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
-  Link,
   Button,
-  Heading,
-  Text,
   useColorModeValue,
-  Textarea,
-  Select,
 } from "@chakra-ui/react";
-import {
-  diseases,
-  doctor_categories,
-  times,
-} from "../../constants/globalconstants";
+
 import { usePatientStore } from "../../store/patientStore";
 import { useNavigate } from "react-router-dom";
 
 const PerformLabTest = () => {
   const performLabTest = usePatientStore((state) => state.performLabTest);
-  const createSession = usePatientStore((state) => state.createSession);
   const patient = usePatientStore((state) => state.patient);
   const navigate = useNavigate();
   const [formData, setformData] = useState({

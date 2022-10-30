@@ -47,8 +47,8 @@ const ImmediateInfo = () => {
           Chronic Disease History
         </h1>
         <div className="flex flex-wrap gap-5 py-1 px-2 my-3">
-          {patient.chronic_diseases.map((obj) => (
-            <Tag>{obj.disease}</Tag>
+          {patient.chronic_diseases.map((obj, idx) => (
+            <Tag key={idx}>{obj.disease}</Tag>
           ))}
         </div>
       </div>

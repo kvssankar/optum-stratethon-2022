@@ -39,7 +39,7 @@ const PatientsTable = () => {
         <Tbody>
           {doctorSessions ? (
             doctorSessions.map((session) => (
-              <Tr>
+              <Tr key={session._id}>
                 <Td>1</Td>
                 <Td>{session.patient_id["name"]}</Td>
                 <Td>{moment(session.started_at.date).calendar()}</Td>

@@ -2,11 +2,7 @@ import React from "react";
 import AuthenticationForm from "../../components/Doctor/Authentication";
 
 const Authentication = () => {
-  return (
-    <div className=''>
-      <AuthenticationForm />
-    </div>
-  );
+  return <AuthenticationForm />;
 };
 
 export default Authentication;

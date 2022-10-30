@@ -77,7 +77,9 @@ const CreateSession = () => {
                   }}
                 >
                   {Object.keys(diseases).map((d) => (
-                    <option value={d}>{d}</option>
+                    <option key={d} value={d}>
+                      {d}
+                    </option>
                   ))}
                 </Select>
               </FormControl>
@@ -90,7 +92,9 @@ const CreateSession = () => {
                   }}
                 >
                   {doctor_categories.map((c) => (
-                    <option value={c}>{c}</option>
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
                   ))}
                 </Select>
               </FormControl>
@@ -113,7 +117,9 @@ const CreateSession = () => {
                   }}
                 >
                   {Object.keys(times).map((time) => (
-                    <option value={time}>{times[time]}</option>
+                    <option key={time} value={time}>
+                      {times[time]}
+                    </option>
                   ))}
                 </Select>
               </FormControl>

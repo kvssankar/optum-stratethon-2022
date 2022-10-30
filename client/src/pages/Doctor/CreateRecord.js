@@ -18,7 +18,6 @@ import ComponentLoader from "../../components/Loader/ComponentLoader";
 
 const CreateRecord = () => {
   const navigate = useNavigate();
-  //GETTING FROM STORE
   const createRecord = useDoctorStore((state) => state.createRecord);
   const doctor = useDoctorStore((state) => state.doctor);
   const patient = useDoctorStore((state) => state.patient);
