@@ -29,3 +29,14 @@
 ## TECH STACK
 
 ![enter image description here](https://res.cloudinary.com/sankarkvs/image/upload/v1667146913/WhatsApp_Image_2022-10-30_at_18.45.58_cjgnar.jpg)
+
+## IMP LINKS
+
+ - YouTube Demo Link : 
+	 - https://youtu.be/PJsjCuFpVyQ
+ - Kaggle Links: 
+	 - https://www.kaggle.com/code/thejineaswar/optum-encounter-pricing
+	 - https://www.kaggle.com/code/thejineaswar/optum-clean-procedure-pricing
+	 - https://www.kaggle.com/code/thejineaswar/optum-clean-patient-history-processsing
+ - Full Presentaion PPT Link: 
+	 - https://docs.google.com/presentation/d/1hoqY4ZBrXEqMOH2ArSTze8gN2-5vUlWXG_nmuzHvCX8/edit?usp=sharing
