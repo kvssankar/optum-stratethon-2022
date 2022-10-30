@@ -45,21 +45,7 @@ router.get("/doctor/:did/", async (req, res) => {
   }
 });
 
-router.post("/doctor/getSessions", async (req, res) => {
-  try {
-    const sessions = await Session.find({
-      doctor_id: req.body.doctor_id,
-    })
-      .populate("patient_id")
-      .populate("doctor_id");
-    let date_ob = new Date();
-    res.json({ data: sessions, date: date_ob });
-  } catch (err) {
-    res.status(500).json({ status: 1, err });
-  }
-});
-
-router.post("/create", verify, async (req, res) => {
+router.post("/", verify, async (req, res) => {
   const doctors = await Doctor.find({
     not_available: {
       $nin: [

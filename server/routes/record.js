@@ -22,17 +22,22 @@ router.get("/patient/:pid/", async (req, res) => {
   }
 });
 
-router.post("/create", verify, async (req, res) => {
-  const file = new File({
-    name: req.body.filename,
-    url: req.body.filelocation,
-  });
+router.get("/session/:sid", async (req, res) => {
+  try {
+    const records = await Record.find({ session_id: req.params.sid })
+      .populate("session_id")
+      .sort({ created_at: -1 });
+    return res.json(records);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
+router.post("/", verify, async (req, res) => {
   const record = new Record({
     patient_id: req.body.patient_id,
     doctor_id: req.body.doctor_id,
     session_id: req.body.session_id,
-    files: file,
     description: req.body.description,
   });
   try {
@@ -43,7 +48,7 @@ router.post("/create", verify, async (req, res) => {
   }
 });
 
-router.post("/add-file-to-record", async (req, res) => {
+router.post("/addfile", async (req, res) => {
   const rid = req.body.rid;
   const file = new File({
     name: req.body.filename,
@@ -63,14 +68,4 @@ router.post("/add-file-to-record", async (req, res) => {
   }
 });
 
-router.get("/get-sessions/:sid", async (req, res) => {
-  try {
-    const sessions = await Record.find({ session_id: req.params.sid }).populate(
-      "session_id"
-    );
-    return res.json(sessions);
-  } catch (err) {
-    console.log(err);
-  }
-});
 module.exports = router;

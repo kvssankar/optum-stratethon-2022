@@ -27,7 +27,7 @@ function App() {
       </Route>
       <Route path="/doctor" element={<DoctorPrivateRoute />}>
         <Route index={true} element={<DoctorHome />} />
-        <Route path="create-record" element={<CreateRecord />} />
+        <Route path="create-record/:pid/:sid" element={<CreateRecord />} />
         <Route path="session/:session_id" element={<DoctorSession />} />
       </Route>
     </Routes>

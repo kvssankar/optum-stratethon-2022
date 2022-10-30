@@ -54,14 +54,7 @@ const useStore = create(
           set((state) => ({ doctorSessions: res.data.data }));
         });
       },
-      createRecord: (
-        patient_id,
-        session_id,
-        description,
-        filename,
-        filelocation,
-        doctor_id
-      ) => {
+      createRecord: (patient_id, session_id, doctor_id, description) => {
         let config = {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),
@@ -69,13 +62,11 @@ const useStore = create(
         };
         axios
           .post(
-            "/api/record/create",
+            "/api/record/",
             {
               patient_id,
               session_id,
               description,
-              filename,
-              filelocation,
               doctor_id,
             },
             config
@@ -83,7 +74,7 @@ const useStore = create(
           .then((res) => {});
       },
       getRecordsBySessionId: (sid) => {
-        const uri = "/api/record/get-sessions/" + sid;
+        const uri = "/api/record/session/" + sid;
         let config = {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),
@@ -100,11 +91,7 @@ const useStore = create(
           },
         };
         axios
-          .post(
-            "/api/record/add-file-to-record",
-            { rid, filename, filelocation },
-            config
-          )
+          .post("/api/record/addfile", { rid, filename, filelocation }, config)
           .then((res) => {});
       },
       getPatient: (pid) => {

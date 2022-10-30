@@ -56,7 +56,7 @@ const useStore = create(
         };
         axios
           .post(
-            "/api/session/create",
+            "/api/session/",
             { description, disease, category, date, time },
             config
           )
