@@ -35,6 +35,14 @@ const RecordSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  DESCRIPTION: String,
+  VALUE: String,
+  UNITS: String,
+  TYPE: String,
+  CODE: String,
+  PATIENT: String,
+  DATE: String,
+  ENCOUNTER: String,
 });
 
 const File = mongoose.model("File", FileSchema);

@@ -5,14 +5,16 @@ const Patient = require("../models/Patient");
 const LabTest = require("../models/labTest");
 const verify = require("../verify");
 const axios = require("axios").create();
+const { sendmail } = require("../utils/sendmail");
 
 router.get("/:sid", async (req, res) => {
   try {
-    const session = await Session.findById(req.params.sid)
+    const session = await Session.findOne({ ENCOUNTER: req.params.sid })
       .populate("doctor_id")
       .populate("patient_id");
     res.json({ data: session });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ status: 1, err });
   }
 });
@@ -21,7 +23,6 @@ router.get("/patient/:pid/", verify, async (req, res) => {
   try {
     const sessions = await Session.find({
       patient_id: req.params.pid,
-      ended_at: null,
     })
       .sort({ started_at: 1 })
       .populate("doctor_id")
@@ -88,8 +89,15 @@ router.post("/end", async (req, res) => {
     const session = await Session.updateOne(
       { _id: req.body.session_id },
       { $set: { ended_at: Date.now() } }
-    );
-    res.json({ data: session });
+    ).populate("patient_id");
+    try {
+      await sendmail(
+        session.patient_id.email,
+        "Session Ended, kindly fill Survey  ",
+        "Hello, Kindly help us improve our services by filling this survey. <a href='http://localhost:3000/survey'>Survey</a>"
+      );
+      res.json({ data: session });
+    } catch (err) {}
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }

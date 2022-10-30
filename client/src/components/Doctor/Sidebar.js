@@ -146,7 +146,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       />
 
       <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-        Logo
+        Healtheaze
       </Text>
     </Flex>
   );

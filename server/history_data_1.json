@@ -1,0 +1,53 @@
+[
+  {
+    "ENCOUNTER": "147a2ce8-7859-4b7b-b2d7-34daac31d1a4",
+    "START": 1583626525000,
+    "PATIENT": "34c8b604-96de-49b6-b88d-ee1d2669c6fd",
+    "ENCOUNTERCLASS": "inpatient",
+    "CODE": 1505002,
+    "DESCRIPTION": "Hospital admission for isolation (procedure)",
+    "BASE_ENCOUNTER_COST": 129.16,
+    "TOTAL_CLAIM_COST": 129.16,
+    "PAYER_COVERAGE": 29.16,
+    "REASONCODE": 840539006,
+    "REASONDESCRIPTION": "COVID-19",
+    "diff_days": -1,
+    "diff_days_1": -1,
+    "Medication": "0.4 ML Enoxaparin sodium 100 MG/ML Prefilled Syringe NDA020503 200 ACTUAT Albuterol 0.09 MG/ACTUAT Metered Dose Inhaler Acetaminophen 500 MG Oral Tablet 1 ML Enoxaparin sodium 150 MG/ML Prefilled Syringe",
+    "Condition": "Pneumonia (disorder) Hypoxemia (disorder) Respiratory distress (finding) Acute respiratory failure (disorder) Sepsis caused by virus (disorder) Acute deep venous thrombosis (disorder)"
+  },
+  {
+    "ENCOUNTER": "ab6f86e7-3d00-4114-93d7-2d0963426636",
+    "START": 1584404125000,
+    "PATIENT": "34c8b604-96de-49b6-b88d-ee1d2669c6fd",
+    "ENCOUNTERCLASS": "inpatient",
+    "CODE": 305351004,
+    "DESCRIPTION": "Admission to intensive care unit (procedure)",
+    "BASE_ENCOUNTER_COST": 129.16,
+    "TOTAL_CLAIM_COST": 129.16,
+    "PAYER_COVERAGE": 29.16,
+    "REASONCODE": 840539006,
+    "REASONDESCRIPTION": "COVID-19",
+    "diff_days": -1,
+    "diff_days_1": 11,
+    "Medication": "Albuterol 5 MG/ML Inhalation Solution vancomycin 1000 MG Injection piperacillin 4000 MG / tazobactam 500 MG Injection 4 ML Norepinephrine 1 MG/ML Injection 1 ML Vasopressin (USP) 20 UNT/ML Injection",
+    "Condition": "Septic shock (disorder) Acute respiratory distress syndrome (disorder)"
+  },
+  {
+    "ENCOUNTER": "628bab22-ebab-49a1-804b-708cff4a477c",
+    "START": 982623805000,
+    "PATIENT": "34c8b604-96de-49b6-b88d-ee1d2669c6fd",
+    "ENCOUNTERCLASS": "ambulatory",
+    "CODE": 185347001,
+    "DESCRIPTION": "Encounter for problem",
+    "BASE_ENCOUNTER_COST": 129.16,
+    "TOTAL_CLAIM_COST": 129.16,
+    "PAYER_COVERAGE": 69.16,
+    "REASONCODE": 239873007,
+    "REASONDESCRIPTION": "Osteoarthritis of knee",
+    "diff_days": 6732,
+    "diff_days_1": 4081,
+    "Medication": "Naproxen sodium 220 MG Oral Tablet",
+    "Condition": "Osteoarthritis of knee"
+  }
+]

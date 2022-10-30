@@ -24,8 +24,8 @@ const PatientsTable = () => {
   const doctorSessions = useDoctorStore((state) => state.doctorSessions);
 
   return (
-    <TableContainer border={"2px"} rounded="md" borderColor={"blue.500"}>
-      <Table size="sm" variant="simple" colorScheme={"blue"}>
+    <TableContainer border={"2px"} rounded='md' borderColor={"blue.500"}>
+      <Table size='sm' variant='simple' colorScheme={"blue"}>
         <Thead>
           <Tr>
             <Th isNumeric>Sno</Th>
@@ -49,8 +49,8 @@ const PatientsTable = () => {
                 <Td>
                   {" "}
                   <IconButton
-                    variant="outline"
-                    aria-label="open menu"
+                    variant='outline'
+                    aria-label='open menu'
                     icon={<FiNavigation />}
                     onClick={() => onButtonClick(session._id)}
                   />

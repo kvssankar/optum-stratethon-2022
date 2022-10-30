@@ -33,6 +33,21 @@ const sessionSchema = new mongoose.Schema({
   ended_at: {
     type: Date,
   },
+  ENCOUNTER: String,
+  START: Number,
+  PATIENT: String,
+  ENCOUNTERCLASS: String,
+  CODE: Number,
+  DESCRIPTION: String,
+  BASE_ENCOUNTER_COST: Number,
+  TOTAL_CLAIM_COST: Number,
+  PAYER_COVERAGE: Number,
+  REASONCODE: Number,
+  REASONDESCRIPTION: String,
+  diff_days: Number,
+  diff_days_1: Number,
+  Medication: String,
+  Condition: String,
 });
 
 const Session = mongoose.model("Session", sessionSchema);

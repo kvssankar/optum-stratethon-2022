@@ -61,6 +61,10 @@ const AllRecords = (session_id) => {
     setLoading(true);
     await uploadFile(rid);
     setLoading(false);
+    if (filename === "" || file === null) {
+      alert("Please provide all details first");
+      return;
+    }
     onClose();
     navigate("/doctor");
   };
@@ -103,6 +107,7 @@ const AllRecords = (session_id) => {
                               <FormLabel>File name</FormLabel>
                               <Input
                                 type="text"
+                                name="filename"
                                 onChange={(e) => onChange(e)}
                                 required
                               />

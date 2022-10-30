@@ -19,7 +19,7 @@ import moment from "moment";
 const AllSessionTable = () => {
   const navigate = useNavigate();
   const onButtonClick = (session_id) => {
-    const x = "/session/" + session_id;
+    const x = "/patient/session/" + session_id;
     navigate(x);
   };
 
@@ -43,9 +43,11 @@ const AllSessionTable = () => {
             <Tr key={session._id}>
               <Td>1</Td>
               <Td>{times[session.started_at.time]}</Td>
-              <Td>{moment(session.started_at.date).calendar()}</Td>
+              <Td>{moment(session.started_at.date).format("LL")}</Td>
               <Td>
-                {session.ended_at ? session.ended_at.substring(0, 10) : "-"}
+                {session.ended_at
+                  ? moment(session.ended_at).format("LL")
+                  : "In Progress"}
               </Td>
               <Td>{session.description}</Td>
               <Td>
@@ -54,7 +56,7 @@ const AllSessionTable = () => {
                   variant="outline"
                   aria-label="open menu"
                   icon={<FiNavigation />}
-                  onClick={() => onButtonClick(session._id)}
+                  onClick={() => onButtonClick(session.ENCOUNTER)}
                 />
               </Td>
             </Tr>

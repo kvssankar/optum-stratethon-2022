@@ -104,6 +104,16 @@ const useStore = create(
           set({ patient: res.data.data });
         });
       },
+      endSession: (sid) => {
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        axios.post("/api/session/end", { sid }, config).then((res) => {
+          console.log("session ended", res.data);
+        });
+      },
     }),
     {
       name: "doctor-storage",

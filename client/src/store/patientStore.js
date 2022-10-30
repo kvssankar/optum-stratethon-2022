@@ -7,6 +7,8 @@ const useStore = create(
   persist(
     (set) => ({
       patient: null,
+      particularRecords: null,
+      datewiseRecords: null,
       sessions: [],
       labTests: [],
       particularSession: null,
@@ -89,6 +91,28 @@ const useStore = create(
         };
         axios.get(url, config).then((res) => {
           set((state) => ({ sessions: res.data.data }));
+        });
+      },
+      getRecordsBySessionId: (sid) => {
+        const uri = "/api/record/session/" + sid;
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        axios.get(uri, config).then((res) => {
+          set({ particularRecords: res.data });
+        });
+      },
+      getDatewiseRecords: (session_id) => {
+        const uri = "/api/record/datewise/" + session_id;
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        axios.get(uri, config).then((res) => {
+          set({ datewiseRecords: res.data });
         });
       },
       // performLabTest: (patient_id, name, fileUrl) => {

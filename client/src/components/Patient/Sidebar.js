@@ -15,11 +15,11 @@ import {
 import { FiHome, FiCompass, FiStar, FiSettings, FiMenu } from "react-icons/fi";
 
 const LinkItems = [
-  { name: "Profile", icon: FiHome, link: "/" },
+  { name: "Profile", icon: FiHome, link: "/patient" },
   // { name: "Session", icon: FiTrendingUp, link: "/session" },
-  { name: "Lab Tests", icon: FiCompass, link: "/labTests" },
-  { name: "Tests progress", icon: FiStar, link: "/testProgress" },
-  { name: "Edit Details", icon: FiSettings, link: "/session" },
+  { name: "Lab Tests", icon: FiCompass, link: "/patient" },
+  { name: "Tests progress", icon: FiStar, link: "/patient/testprogress" },
+  { name: "Edit Details", icon: FiSettings, link: "/patient" },
 ];
 
 export default function Sidebar({ children }) {
@@ -139,7 +139,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       />
 
       <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-        Logo
+        Healtheaze
       </Text>
     </Flex>
   );

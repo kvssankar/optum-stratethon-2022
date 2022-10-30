@@ -10,10 +10,15 @@ const LabTestSchema = new mongoose.Schema({
     ref: "Patient",
     required: true,
   },
-  lab_tester_id: {
+  doctor_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "LabTester",
-    // required: true,
+    ref: "Doctor",
+    required: true,
+  },
+  session_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Session",
+    required: true,
   },
   created_at: {
     type: Date,

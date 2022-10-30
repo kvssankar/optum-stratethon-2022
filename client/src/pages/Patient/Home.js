@@ -49,7 +49,7 @@ const Home = () => {
             <Button
               colorScheme="blue"
               variant="outline"
-              onClick={() => navigate("/patient/create-session")}
+              onClick={() => navigate("/patient/book-appointment")}
             >
               Create New Session
             </Button>

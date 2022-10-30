@@ -24,9 +24,10 @@ router.get("/patient/:pid/", async (req, res) => {
 
 router.get("/session/:sid", async (req, res) => {
   try {
-    const records = await Record.find({ session_id: req.params.sid })
+    const records = await Record.find({ ENCOUNTER: req.params.sid })
       .populate("session_id")
-      .sort({ created_at: -1 });
+      .sort({ created_at: -1 })
+      .limit(10);
     return res.json(records);
   } catch (err) {
     console.log(err);
@@ -45,6 +46,30 @@ router.post("/", verify, async (req, res) => {
     res.json(savedRecord);
   } catch (err) {
     res.status(500).json({ status: 1, err });
+  }
+});
+
+router.get("/datewise/:sid", async (req, res) => {
+  try {
+    const records = await Record.find({ ENCOUNTER: req.params.sid });
+    const groupedRecords = new Map();
+    await records.forEach((record) => {
+      const date = record.DATE;
+      console.log(date);
+      if (groupedRecords.has(date)) {
+        groupedRecords.get(date).push(record);
+      } else {
+        groupedRecords.set(date, [record]);
+      }
+    });
+    //convert map to object
+    const groupedRecordsObj = {};
+    groupedRecords.forEach((value, key) => {
+      groupedRecordsObj[key] = value;
+    });
+    return res.json(groupedRecordsObj);
+  } catch (err) {
+    console.log(err);
   }
 });
 
