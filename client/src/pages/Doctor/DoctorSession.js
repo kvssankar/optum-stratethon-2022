@@ -11,6 +11,9 @@ const Session = () => {
   const navigate = useNavigate();
   const { session_id } = useParams();
   const particularSession = usePatientStore((state) => state.particularSession);
+  const getDatewiseRecords = useDoctorStore(
+    (state) => state.getDatewiseRecords
+  );
   const getRecordsBySessionId = useDoctorStore(
     (state) => state.getRecordsBySessionId
   );
@@ -20,6 +23,7 @@ const Session = () => {
   useEffect(() => {
     getParticularSession(session_id);
     getRecordsBySessionId(session_id);
+    getDatewiseRecords(session_id);
   }, []);
 
   return (

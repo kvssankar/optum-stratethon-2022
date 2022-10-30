@@ -114,7 +114,7 @@ router.post("/end", async (req, res) => {
       await sendmail(
         session.patient_id.email,
         "Session Ended, kindly fill Survey  ",
-        "Hello, Kindly help us improve our services by filling this survey. <a href='http://localhost:3000/survey'>Survey</a>"
+        "Hello, Kindly help us improve our services by filling this survey. <br> <a href='https://42zdedfdni7.typeform.com/to/fYVjPKm2'>Survey</a>"
       );
       res.json({ data: session });
     } catch (err) {

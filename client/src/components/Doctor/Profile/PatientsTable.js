@@ -15,7 +15,7 @@ import {
 import ComponentLoader from "../../Loader/ComponentLoader";
 import { useDoctorStore } from "../../../store/doctorStore";
 
-const PatientsTable = () => {
+const PatientsTable = ({ flag }) => {
   const navigate = useNavigate();
   const onButtonClick = (session_id) => {
     const x = "/doctor/session/" + session_id;
@@ -38,25 +38,46 @@ const PatientsTable = () => {
         </Thead>
         <Tbody>
           {doctorSessions ? (
-            doctorSessions.map((session, idx) => (
-              <Tr key={session._id}>
-                <Td>{idx + 1}</Td>
-                <Td>{session.patient_id["name"]}</Td>
-                <Td>{moment(session.started_at.date).calendar()}</Td>
-                <Td>{session.disease}</Td>
-                <Td>{session.description}</Td>
+            doctorSessions.map((session, idx) => {
+              return flag === 0 && !session.ended_at ? (
+                <Tr key={session._id}>
+                  <Td>{idx + 1}</Td>
+                  <Td>{session.patient_id["name"]}</Td>
+                  <Td>{moment(session.started_at.date).calendar()}</Td>
+                  <Td>{session.disease}</Td>
+                  <Td>{session.description}</Td>
 
-                <Td>
-                  {" "}
-                  <IconButton
-                    variant="outline"
-                    aria-label="open menu"
-                    icon={<FiNavigation />}
-                    onClick={() => onButtonClick(session.ENCOUNTER)}
-                  />
-                </Td>
-              </Tr>
-            ))
+                  <Td>
+                    {" "}
+                    <IconButton
+                      variant="outline"
+                      aria-label="open menu"
+                      icon={<FiNavigation />}
+                      onClick={() => onButtonClick(session.ENCOUNTER)}
+                    />
+                  </Td>
+                </Tr>
+              ) : flag === 1 && session.ended_at ? (
+                <Tr key={session._id}>
+                  <Td>{idx + 1}</Td>
+                  <Td>{session.patient_id["name"]}</Td>
+                  <Td>{moment(session.started_at.date).calendar()}</Td>
+                  <Td>{session.disease}</Td>
+                  <Td>{session.description}</Td>
+                  <Td>
+                    {" "}
+                    <IconButton
+                      variant="outline"
+                      aria-label="open menu"
+                      icon={<FiNavigation />}
+                      onClick={() => onButtonClick(session.ENCOUNTER)}
+                    />
+                  </Td>
+                </Tr>
+              ) : (
+                <></>
+              );
+            })
           ) : (
             <ComponentLoader />
           )}

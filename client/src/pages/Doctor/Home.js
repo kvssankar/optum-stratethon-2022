@@ -29,14 +29,16 @@ const Home = () => {
       {doctor && doctorSessions ? (
         <div className="flex flex-col pt-5 pb-5 pr-0 md:pr-5 w-full">
           <div className="flex justify-between">
-            <h1 className="font-bold text-blue-500 text-lg">Welcome Sankar</h1>
+            <h1 className="font-bold text-blue-500 text-lg">
+              Welcome {doctor.name}
+            </h1>
             <form onSubmit={(e) => onSubmit(e)}>
               <button type="submit" className="font-bold text-blue-500 text-lg">
                 Logout
               </button>
             </form>
           </div>
-          <p className="text-sm">How are you doing ?</p>
+          <p className="text-sm">Ready for the day !!</p>
           <ImmediateInfo />
           <h1 className="text-xl text-blue-500 font-semibold mb-3">
             Today's Appointments

@@ -21,10 +21,14 @@ const AllPatients = () => {
       {doctor && doctorSessions ? (
         <div className="flex flex-col pt-5 pb-5 pr-0 md:pr-5 w-full">
           <h1 className="text-xl text-blue-500 font-semibold mb-3">
-            All Appointments
+            Active Appointments
           </h1>
+          <div className="mb-3">
+            <PatientsTable flag={0} />
+          </div>
+          <h1 className="text-xl text-blue-500 font-semibold mb-3">History</h1>
           <div className="">
-            <PatientsTable />
+            <PatientsTable flag={1} />
           </div>
         </div>
       ) : (

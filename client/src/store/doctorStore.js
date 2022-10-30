@@ -9,6 +9,7 @@ const useStore = create(
       doctorSessions: [],
       patient: null,
       particularRecords: null,
+      datewiseRecords: null,
       login: (email, otp) => {
         axios.post("/api/doctor/login", { email, otp }).then((res) => {
           localStorage.setItem("auth-token", res.data.token);
@@ -113,6 +114,17 @@ const useStore = create(
         };
         axios.get("/api/doctor/patient/" + pid, config).then((res) => {
           set({ patient: res.data.data });
+        });
+      },
+      getDatewiseRecords: (session_id) => {
+        const uri = "/api/record/datewise/" + session_id;
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        axios.get(uri, config).then((res) => {
+          set({ datewiseRecords: res.data });
         });
       },
       endSession: (sid) => {
