@@ -15,6 +15,7 @@ import PatientPrivateRoute from "./pages/Patient/PatientPrivateRoute.js";
 import DoctorPrivateRoute from "./pages/Doctor/DoctorPrivateRoute.js";
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 import AllPatients from "./pages/Doctor/AllPatients.js";
+import PatientProfile from "./pages/Doctor/PatientProfile.js";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="create-record/:pid/:sid" element={<CreateRecord />} />
           <Route path="allpatients" element={<AllPatients />} />
           <Route path="session/:session_id" element={<DoctorSession />} />
+          <Route path="patient/:pid" element={<PatientProfile />} />
         </Route>
       </Routes>
     </div>

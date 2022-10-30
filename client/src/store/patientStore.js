@@ -9,6 +9,7 @@ const useStore = create(
       patient: null,
       particularRecords: null,
       datewiseRecords: null,
+      estimatedPrice: null,
       sessions: [],
       labTests: [],
       particularSession: null,
@@ -113,6 +114,18 @@ const useStore = create(
         };
         axios.get(uri, config).then((res) => {
           set({ datewiseRecords: res.data });
+        });
+      },
+      geEstimatedPrice: (patient_id, condition, disease) => {
+        const uri =
+          process.env.REACT_APP_FAST_API_ENDPOINT +
+          patient_id +
+          "/" +
+          condition +
+          "/" +
+          disease;
+        axios.get(uri).then((res) => {
+          set({ estimatedPrice: res.data });
         });
       },
       // performLabTest: (patient_id, name, fileUrl) => {

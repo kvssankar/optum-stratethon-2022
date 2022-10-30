@@ -3,6 +3,7 @@ export const doctor_categories = [
   "CARDIOLOGIST",
   "NEUROLOGIST",
   "DERMATOLOGIST",
+  "ENDOCRINOLOGIST",
   "ENT",
   "GASTROENTEROLOGIST",
   "GENERAL PHYSICIAN",

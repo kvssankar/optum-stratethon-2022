@@ -11,6 +11,7 @@ const Session = () => {
   const navigate = useNavigate();
   const { session_id } = useParams();
   const particularSession = usePatientStore((state) => state.particularSession);
+  const datewiseRecords = useDoctorStore((state) => state.datewiseRecords);
   const getDatewiseRecords = useDoctorStore(
     (state) => state.getDatewiseRecords
   );
@@ -29,29 +30,33 @@ const Session = () => {
   return (
     <div className="flex flex-col md:flex-row mx-5 ">
       <Sidebar />
-      <div className="flex flex-col pt-5 pb-5 pr-0 md:pr-5 w-full">
-        <DetailedSession session_id={session_id} />
-        <div className="flex justify-between mb-3">
-          <h1 className="text-xl text-blue-500 font-semibold mb-3">Records</h1>
-          <Button
-            colorScheme="blue"
-            variant="outline"
-            onClick={() =>
-              navigate(
-                "/doctor/create-record/" +
-                  particularSession.patient_id._id +
-                  "/" +
-                  session_id
-              )
-            }
-          >
-            Create New Record
-          </Button>
+      {particularSession && datewiseRecords && (
+        <div className="flex flex-col pt-5 pb-5 pr-0 md:pr-5 w-full">
+          <DetailedSession session_id={session_id} />
+          <div className="flex justify-between mb-3">
+            <h1 className="text-xl text-blue-500 font-semibold mb-3">
+              Records
+            </h1>
+            <Button
+              colorScheme="blue"
+              variant="outline"
+              onClick={() =>
+                navigate(
+                  "/doctor/create-record/" +
+                    particularSession.patient_id._id +
+                    "/" +
+                    session_id
+                )
+              }
+            >
+              Create New Record
+            </Button>
+          </div>
+          <div>
+            <AllRecords session_id={session_id} />
+          </div>
         </div>
-        <div>
-          <AllRecords session_id={session_id} />
-        </div>
-      </div>
+      )}
     </div>
   );
 };

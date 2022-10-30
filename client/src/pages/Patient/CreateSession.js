@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Patient/Sidebar";
 import {
   Box,
@@ -10,6 +10,11 @@ import {
   useColorModeValue,
   Textarea,
   Select,
+  Alert,
+  AlertIcon,
+  Spinner,
+  AlertTitle,
+  AlertDescription,
 } from "@chakra-ui/react";
 import {
   diseases,
@@ -35,9 +40,40 @@ const CreateSession = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
   };
+  const patient = usePatientStore((state) => state.patient);
   const createSession = usePatientStore((state) => state.createSession);
+  const getEstimatedPrice = usePatientStore((state) => state.getEstimatedPrice);
+  const estimatedPrice = usePatientStore((state) => state.estimatedPrice);
   const { disease, description, date, time, category } = formData;
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(0);
+  const showEstimate = async () => {
+    setLoading(1);
+    await setTimeout(() => {
+      setLoading(2);
+      setTimeout(() => {
+        setLoading(3);
+        setTimeout(() => {
+          getEstimatedPrice(
+            patient._id,
+            formData.description,
+            formData.disease
+          );
+        }, 2000);
+      }, 2000);
+    }, 2000);
+  };
+  useEffect(() => {
+    if (
+      formData.disease.length &&
+      formData.category.length &&
+      formData.description.length
+    ) {
+      showEstimate();
+    } else {
+      setLoading(0);
+    }
+  }, [formData]);
   return (
     <div className="flex flex-col md:flex-row mx-5 ">
       <Sidebar />
@@ -124,6 +160,47 @@ const CreateSession = () => {
                 </Select>
               </FormControl>
               <Stack spacing={10}>
+                {loading !== 0 && (
+                  <Alert
+                    status="success"
+                    variant="subtle"
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    textAlign="center"
+                    minHeight="200px"
+                  >
+                    {loading !== 4 && <Spinner boxSize="40px" mr={0} />}
+                    {loading === 4 && <AlertIcon boxSize="40px" mr={0} />}
+                    <AlertTitle mt={4} mb={1} fontSize="lg">
+                      {loading === 1 && " Fetching your medical history..."}
+                      {loading === 2 && " Checking your current condition..."}
+                      {loading === 3 && " Checking your current condition..."}
+                      {loading === 4 &&
+                        " Estimates given below are approxiamate based on the data we have!!"}
+                    </AlertTitle>
+                    {loading === 4 && (
+                      <AlertDescription maxWidth="sm">
+                        Consultaion Fee : {estimatedPrice.consultaion_fee}
+                        <br />
+                        Medicine Cost : {estimatedPrice.medicine_cost}
+                        <br />
+                        Procedures Costs : {estimatedPrice.procedures_cost}
+                        <br />
+                        Total :{" "}
+                        {estimatedPrice.consultaion_fee +
+                          estimatedPrice.medicine_cost +
+                          estimatedPrice.procedures_cost}
+                        <br />
+                        {/* below one is analytical stuff for future scope */}
+                        {/* <p className="text-sm font-semibold">
+                          On an average diabetic patients visit the hospital 10
+                          times a year, hence the annual cost is 8610
+                        </p> */}
+                      </AlertDescription>
+                    )}
+                  </Alert>
+                )}
                 <Button
                   bg={"blue.400"}
                   color={"white"}
