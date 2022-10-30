@@ -9,9 +9,11 @@ const Home = () => {
   const doctor = useDoctorStore((state) => state.doctor);
   const logout = useDoctorStore((state) => state.logout);
   const doctorSessions = useDoctorStore((state) => state.doctorSessions);
-  const getDoctorSessions = useDoctorStore((state) => state.getDoctorSessions);
+  const getTodaysDoctorSessions = useDoctorStore(
+    (state) => state.getTodaysDoctorSessions
+  );
   function getDoctorSessionsFunction() {
-    getDoctorSessions(doctor._id);
+    getTodaysDoctorSessions(doctor._id);
   }
   useEffect(() => {
     if (doctor) getDoctorSessionsFunction(doctor._id);

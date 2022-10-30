@@ -43,8 +43,19 @@ const useStore = create(
         set({ doctor: null });
         localStorage.setItem("auth-token", null);
       },
-      getDoctorSessions: (doctor_id) => {
+      getTodaysDoctorSessions: (doctor_id) => {
         const uri = "/api/session/doctor/" + doctor_id;
+        let config = {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        };
+        axios.get(uri, config).then((res) => {
+          set((state) => ({ doctorSessions: res.data.data }));
+        });
+      },
+      getDoctorSessions: (doctor_id) => {
+        const uri = "/api/session/doctor/all/" + doctor_id;
         let config = {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),

@@ -39,9 +39,9 @@ const AllSessionTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {patientSessions.map((session) => (
+          {patientSessions.map((session, idx) => (
             <Tr key={session._id}>
-              <Td>1</Td>
+              <Td>{idx + 1}</Td>
               <Td>{times[session.started_at.time]}</Td>
               <Td>{moment(session.started_at.date).format("LL")}</Td>
               <Td>

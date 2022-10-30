@@ -23,7 +23,7 @@ import {
 
 const LinkItems = [
   { name: "Home", icon: FiHome, link: "/doctor" },
-  { name: "Patients", icon: FiTrendingUp, link: "/doctor/patients" },
+  { name: "Patients", icon: FiTrendingUp, link: "/doctor/allpatients" },
   { name: "Change Availabiliy", icon: FiCompass, link: "/doctor/availability" },
   { name: "Chat", icon: FiStar, link: "/doctor/chat" },
   { name: "Settings", icon: FiSettings, link: "/doctor/settings" },
@@ -76,7 +76,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Healtheaze
+          Swastya
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
@@ -146,7 +146,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       />
 
       <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-        Healtheaze
+        Swastya
       </Text>
     </Flex>
   );

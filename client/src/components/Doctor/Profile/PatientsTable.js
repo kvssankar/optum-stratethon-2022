@@ -24,8 +24,8 @@ const PatientsTable = () => {
   const doctorSessions = useDoctorStore((state) => state.doctorSessions);
 
   return (
-    <TableContainer border={"2px"} rounded='md' borderColor={"blue.500"}>
-      <Table size='sm' variant='simple' colorScheme={"blue"}>
+    <TableContainer border={"2px"} rounded="md" borderColor={"blue.500"}>
+      <Table size="sm" variant="simple" colorScheme={"blue"}>
         <Thead>
           <Tr>
             <Th isNumeric>Sno</Th>
@@ -38,9 +38,9 @@ const PatientsTable = () => {
         </Thead>
         <Tbody>
           {doctorSessions ? (
-            doctorSessions.map((session) => (
+            doctorSessions.map((session, idx) => (
               <Tr key={session._id}>
-                <Td>1</Td>
+                <Td>{idx + 1}</Td>
                 <Td>{session.patient_id["name"]}</Td>
                 <Td>{moment(session.started_at.date).calendar()}</Td>
                 <Td>{session.disease}</Td>
@@ -49,10 +49,10 @@ const PatientsTable = () => {
                 <Td>
                   {" "}
                   <IconButton
-                    variant='outline'
-                    aria-label='open menu'
+                    variant="outline"
+                    aria-label="open menu"
                     icon={<FiNavigation />}
-                    onClick={() => onButtonClick(session._id)}
+                    onClick={() => onButtonClick(session.ENCOUNTER)}
                   />
                 </Td>
               </Tr>

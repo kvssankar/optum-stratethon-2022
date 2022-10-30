@@ -14,28 +14,30 @@ import DoctorAuthentication from "./pages/Doctor/Authentication";
 import PatientPrivateRoute from "./pages/Patient/PatientPrivateRoute.js";
 import DoctorPrivateRoute from "./pages/Doctor/DoctorPrivateRoute.js";
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
+import AllPatients from "./pages/Doctor/AllPatients.js";
 
 function App() {
   return (
     <div>
       <TawkMessengerReact
-        propertyId='635a2cd9daff0e1306d437f4'
-        widgetId='1ggc3ud6l'
+        propertyId="635e1a35b0d6371309cc4410"
+        widgetId="1ggjpcoq7"
       />
       <Routes>
-        <Route path='/' element={<>Home</>} />
-        <Route path='/login/patient' element={<PatientAuthentication />} />
-        <Route path='/login/doctor' element={<DoctorAuthentication />} />
-        <Route path='/patient' element={<PatientPrivateRoute />}>
+        <Route path="/" element={<>Home</>} />
+        <Route path="/login/patient" element={<PatientAuthentication />} />
+        <Route path="/login/doctor" element={<DoctorAuthentication />} />
+        <Route path="/patient" element={<PatientPrivateRoute />}>
           <Route index={true} element={<PatientHome />} />
-          <Route path='book-appointment' element={<CreateSession />} />
-          <Route path='session/:session_id' element={<PatientSession />} />
-          <Route path='testprogress' element={<TestProgress />} />
+          <Route path="book-appointment" element={<CreateSession />} />
+          <Route path="session/:session_id" element={<PatientSession />} />
+          <Route path="testprogress" element={<TestProgress />} />
         </Route>
-        <Route path='/doctor' element={<DoctorPrivateRoute />}>
+        <Route path="/doctor" element={<DoctorPrivateRoute />}>
           <Route index={true} element={<DoctorHome />} />
-          <Route path='create-record/:pid/:sid' element={<CreateRecord />} />
-          <Route path='session/:session_id' element={<DoctorSession />} />
+          <Route path="create-record/:pid/:sid" element={<CreateRecord />} />
+          <Route path="allpatients" element={<AllPatients />} />
+          <Route path="session/:session_id" element={<DoctorSession />} />
         </Route>
       </Routes>
     </div>

@@ -35,7 +35,25 @@ router.get("/patient/:pid/", verify, async (req, res) => {
 
 router.get("/doctor/:did/", async (req, res) => {
   try {
-    const sessions = await Session.find({ doctor_id: req.params.did })
+    const sessions = await Session.find({
+      doctor_id: req.params.did,
+      "started_at.date": { $gte: new Date() },
+    })
+      .sort({ started_at: 1 })
+      .populate("patient_id")
+      .populate("doctor_id");
+    let date_ob = new Date();
+    res.json({ data: sessions, date: date_ob });
+  } catch (err) {
+    res.status(500).json({ status: 1, err });
+  }
+});
+
+router.get("/doctor/all/:did/", async (req, res) => {
+  try {
+    const sessions = await Session.find({
+      doctor_id: req.params.did,
+    })
       .sort({ started_at: 1 })
       .populate("patient_id")
       .populate("doctor_id");
@@ -86,10 +104,12 @@ router.post("/", verify, async (req, res) => {
 
 router.post("/end", async (req, res) => {
   try {
-    const session = await Session.updateOne(
-      { _id: req.body.session_id },
-      { $set: { ended_at: Date.now() } }
+    const session = await Session.findOneAndUpdate(
+      { ENCOUNTER: req.body.sid },
+      { $set: { ended_at: Date.now() } },
+      { new: true }
     ).populate("patient_id");
+    console.log(session);
     try {
       await sendmail(
         session.patient_id.email,
@@ -97,7 +117,9 @@ router.post("/end", async (req, res) => {
         "Hello, Kindly help us improve our services by filling this survey. <a href='http://localhost:3000/survey'>Survey</a>"
       );
       res.json({ data: session });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   } catch (err) {
     res.status(500).json({ status: 1, err });
   }
