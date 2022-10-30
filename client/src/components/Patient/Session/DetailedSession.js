@@ -66,54 +66,25 @@ const ImmediateInfo = ({ session_id }) => {
               <TabPanel>
                 <div className="flex flex-col">
                   <div>
-                    <p>
-                      {" "}
-                      <span style={{ fontWeight: "bold" }}>
-                        Doctor Name -
-                      </span>{" "}
-                      {particularSession.doctor_id.name}
-                    </p>
-                    <p>
-                      <span style={{ fontWeight: "bold" }}>
-                        Doctor Specialization -
-                      </span>
-                      {particularSession.doctor_id.category}
-                    </p>
-                    <p>
-                      <span style={{ fontWeight: "bold" }}>Doctor Email -</span>
-                      {particularSession.doctor_id.email}
-                    </p>
-                    <hr />
-                  </div>
-                  <div>
-                    <p>
-                      <span style={{ fontWeight: "bold" }}>Description -</span>{" "}
-                      {particularSession.description}
-                    </p>
-                    <div>
-                      {" "}
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>Start Date -</span>{" "}
-                        {particularSession.started_at.date.substring(0, 10)}
-                      </p>
-                    </div>
+                    <b>Doctor Name -</b>
+                    <p> {particularSession.doctor_id.name}</p>
+                    <b>Doctor Specialization -</b>
+                    <p>{particularSession.doctor_id.category}</p>
+                    <b>Doctor Email -</b>
+                    <p>{particularSession.doctor_id.email}</p>
+                    <b>Description -</b>
+                    <p> {particularSession.description}</p>
+                    <b>Start Date -</b>
+                    <p> {particularSession.started_at.date.substring(0, 10)}</p>
                   </div>
                 </div>
               </TabPanel>
               <TabPanel>
-                <div className="flex flex-col md:flex-row justify-center items-center">
-                  <div className="pdf mr-10 ">
-                    <img src="/pdficon.png" width="100px"></img>
-                    <p style={{ fontSize: "10px" }}>Prescription 15/9/2022</p>
-                  </div>
-                  <div className="pdf mr-10">
-                    <img src="/pdficon.png" width="100px"></img>
-                    <p style={{ fontSize: "10px" }}>Prescription 20/9/2022</p>
-                  </div>
-                  <div className="pdf mr-10">
-                    <img src="/pdficon.png" width="100px"></img>
-                    <p style={{ fontSize: "10px" }}>Prescription 10/9/2022</p>
-                  </div>
+                <div className="flex flex-col">
+                  <b>Condtion:-</b>
+                  <p>{particularSession.Condition}</p>
+                  <b>Medication:-</b>
+                  <p>{particularSession.Medication}</p>
                   {/* <div>
                     <Document
                       file='./sample.pdf'

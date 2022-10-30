@@ -37,6 +37,9 @@ const PatientsTable = ({ flag }) => {
           </Tr>
         </Thead>
         <Tbody>
+          {doctorSessions && doctorSessions.length === 0 && (
+            <p className="p-3  w-full">No Appointments for today</p>
+          )}
           {doctorSessions ? (
             doctorSessions.map((session, idx) => {
               return flag === 0 && !session.ended_at ? (

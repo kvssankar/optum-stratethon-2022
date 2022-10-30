@@ -35,6 +35,8 @@ const AllSessionTable = () => {
             <Th>Booking Date</Th>
             <Th>End Date</Th>
             <Th>Description</Th>
+            <Th>Base Cost</Th>
+            <Th>Claim Cost</Th>
             <Th>Open</Th>
           </Tr>
         </Thead>
@@ -50,6 +52,8 @@ const AllSessionTable = () => {
                   : "In Progress"}
               </Td>
               <Td>{session.description}</Td>
+              <Td>{session.BASE_ENCOUNTER_COST}</Td>
+              <Td>{session.TOTAL_CLAIM_COST}</Td>
               <Td>
                 {" "}
                 <IconButton
